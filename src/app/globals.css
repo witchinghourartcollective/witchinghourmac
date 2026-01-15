@@ -1,9 +1,26 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-html,
-body {
-  background-color: #0b0b0d;
-  color: #c7c7cc;
+@keyframes sigilPulse {
+  0%, 100% {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(1.015);
+  }
 }
+
+@keyframes sigilVibrate {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-0.3px, 0.3px); }
+  40%  { transform: translate(0.3px, -0.3px); }
+  60%  { transform: translate(-0.3px, -0.3px); }
+  80%  { transform: translate(0.3px, 0.3px); }
+  100% { transform: translate(0, 0); }
+}
+
+.sigil-animate {
+  animation:
+    sigilPulse 9s ease-in-out infinite,
+    sigilVibrate 0.35s linear infinite;
+}
+
