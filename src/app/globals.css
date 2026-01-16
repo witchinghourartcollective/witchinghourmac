@@ -1,3 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body { background: red !important; color: yellow !important; }
+
+
+:root {
+  --bg-main: #0e0e12;        /* near-black */
+  --bg-panel: #15151d;      /* dark grey */
+  --ink-main: #c7ffd8;      /* pale green */
+  --ink-accent: #9b6cff;    /* purple */
+  --ink-warm: #7a1f2b;      /* maroon */
+  --ink-spark: #ffd86b;     /* yellow */
+}
+
+html, body {
+  background-color: var(--bg-main);
+  color: var(--ink-main);
+}
+
+
 @keyframes sigilPulse {
   0%, 100% {
     opacity: 0.85;
@@ -25,63 +48,41 @@
 }
 
 /* === PERSONAL SIGIL FIELD === */
-
 .personal-sigil {
-  font-family: monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   white-space: pre;
   text-align: center;
-  color: #c7ffd8; /* pale green */
+  color: var(--ink-main);
   animation:
     pulse 3.5s ease-in-out infinite,
-    vibrate 0.15s linear infinite;
+    vibrate 0.18s linear infinite;
   text-shadow:
-    0 0 8px rgba(180, 120, 255, 0.35),
-    0 0 20px rgba(120, 80, 200, 0.2);
+    0 0 10px rgba(155, 108, 255, 0.45),
+    0 0 24px rgba(155, 108, 255, 0.25);
 }
 
-/* subtle breathing */
+/* === WHM SIGIL === */
+.whm-sigil {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  white-space: pre;
+  text-align: center;
+  color: var(--ink-accent);
+  text-shadow:
+    0 0 12px rgba(155,108,255,0.5),
+    0 0 28px rgba(199,255,216,0.25);
+}
+
+/* breathing */
 @keyframes pulse {
-  0%, 100% {
-    opacity: 0.85;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.02);
-  }
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.03); }
 }
 
-/* energetic vibration */
+/* energy */
 @keyframes vibrate {
   0% { transform: translate(0, 0); }
-  25% { transform: translate(0.3px, -0.3px); }
-  50% { transform: translate(-0.3px, 0.3px); }
-  75% { transform: translate(0.3px, 0.3px); }
+  25% { transform: translate(0.4px, -0.4px); }
+  50% { transform: translate(-0.4px, 0.4px); }
+  75% { transform: translate(0.4px, 0.4px); }
   100% { transform: translate(0, 0); }
-}
-
-@keyframes sigilPulse {
-  0%, 100% {
-    opacity: 0.85;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.65;
-    transform: scale(1.015);
-  }
-}
-
-@keyframes sigilVibrate {
-  0%   { transform: translate(0, 0); }
-  20%  { transform: translate(-0.3px, 0.3px); }
-  40%  { transform: translate(0.3px, -0.3px); }
-  60%  { transform: translate(-0.3px, -0.3px); }
-  80%  { transform: translate(0.3px, 0.3px); }
-  100% { transform: translate(0, 0); }
-}
-
-.sigil-animate {
-  animation:
-    sigilPulse 9s ease-in-out infinite,
-    sigilVibrate 0.35s linear infinite;
 }

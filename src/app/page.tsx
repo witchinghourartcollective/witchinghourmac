@@ -2,7 +2,8 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center gap-10 bg-[#0b0b0d]">
+    <main className="min-h-screen flex flex-col items-center justify-center gap-12 px-6 text-center bg-transparent text-inherit">
+
       
       {/* Sigil */}
       <div className="relative">
