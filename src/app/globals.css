@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-body { background: red !important; color: yellow !important; }
-
-
 :root {
   --bg-main: #0e0e12;        /* near-black */
   --bg-panel: #15151d;      /* dark grey */
