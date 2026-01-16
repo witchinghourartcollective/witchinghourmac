@@ -24,3 +24,38 @@
     sigilVibrate 0.35s linear infinite;
 }
 
+/* === PERSONAL SIGIL FIELD === */
+
+.personal-sigil {
+  font-family: monospace;
+  white-space: pre;
+  text-align: center;
+  color: #c7ffd8; /* pale green */
+  animation:
+    pulse 3.5s ease-in-out infinite,
+    vibrate 0.15s linear infinite;
+  text-shadow:
+    0 0 8px rgba(180, 120, 255, 0.35),
+    0 0 20px rgba(120, 80, 200, 0.2);
+}
+
+/* subtle breathing */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+/* energetic vibration */
+@keyframes vibrate {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(0.3px, -0.3px); }
+  50% { transform: translate(-0.3px, 0.3px); }
+  75% { transform: translate(0.3px, 0.3px); }
+  100% { transform: translate(0, 0); }
+}

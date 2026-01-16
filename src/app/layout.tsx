@@ -1,5 +1,13 @@
 import "./globals.css";
 
+import Header from "@/components/Header";
+
+<body>
+  <Header />
+  {children}
+</body>
+
+
 export const metadata = {
   title: "Witching Hour",
   description: "Witching Hour Music & Art Collective",
