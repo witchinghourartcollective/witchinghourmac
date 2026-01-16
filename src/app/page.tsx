@@ -5,7 +5,7 @@ export default function Home() {
     <main className="min-h-screen flex flex-col items-center justify-center gap-10 bg-[#0b0b0d]">
       
       {/* Sigil */}
-      <div className="text-[#c7c7cc] sigil-animate">
+      <div className="relative">
         <Image
           src="/brand/sigil-primary.svg"
           alt="Witching Hour Sigil"
@@ -34,4 +34,3 @@ export default function Home() {
     </main>
   );
 }
-
