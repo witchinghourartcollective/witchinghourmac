@@ -1,3 +1,5 @@
+![Primary sigil](public/brand/sigil-primary.svg)
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
@@ -39,3 +41,14 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 This project uses system fonts and monospace rendering.
 No `next/font` loaders are used.
+
+## WHM Sigil (ASCII Reference)
+
+```
+  \  |   /\     /\  |  /  
+   \ |  /  \   /  \ | /   
+--- \| /     \/    \|/ ---
+    /| \     /\    /|\    
+   / |  \  /   \  / | \   
+  /  |   \/     \/  |  \  
+```
