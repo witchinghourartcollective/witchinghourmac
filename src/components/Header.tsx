@@ -1,18 +1,23 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Header() {
   return (
     <header className="whm-header">
       <Link href="/" className="sigil-lock">
-        <img
-          src="/brand/sigil-whm.svg"
-          alt="Witching Hour Music Sigil"
+        <Image
+          src="/brand/sigil-primary.svg"
+          alt="Primary Sigil"
+          width={28}
+          height={28}
+          className="primary-sigil-mark"
         />
       </Link>
 
       <nav>
         <Link href="/about">About</Link>
         <Link href="/ritual">Ritual</Link>
+        <Link href="/calendar">Calendar</Link>
         <Link href="/links">Links</Link>
       </nav>
     </header>
