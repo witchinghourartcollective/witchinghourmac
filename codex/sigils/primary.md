@@ -29,3 +29,5 @@ public/brand/sigil-primary.svg
 This file is the authoritative meaning.
 The SVG is the authoritative shape.
 
+## Render
+![Primary sigil](../../public/brand/sigil-primary.svg)
