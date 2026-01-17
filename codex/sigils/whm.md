@@ -12,3 +12,9 @@ ASCII reference:
     /| \     /\    /|\
    / |  \  /   \  / | \
   /  |   \/     \/  |  \
+
+## Reference
+Rendered SVG lives at:
+public/brand/sigil-whm.svg
+
+This file is the authoritative shape.
