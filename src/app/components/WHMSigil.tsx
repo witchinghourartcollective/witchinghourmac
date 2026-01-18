@@ -11,12 +11,12 @@ export default function WHMSigil({ className, size = "lg" }: WHMSigilProps) {
     <div className={["whm-sigil", className].filter(Boolean).join(" ")}>
       <pre className={textClass}>
 {String.raw`
-  \  |   /\     /\  |  /
-   \ |  /  \   /  \ | /
-  ––\| /     \/    \|/—
-    /| \     /\    /|\
-   / |  \  /   \  / | \
-  /  |   \/     \/  |  \
+   \  |  /\     /\  |  /
+   \ | /  \   /  \ | /
+____\|/    \ /    \|/____  
+    /|\    / \    /|\
+   / | \  /   \  / | \
+  /  |  \/     \/  |  \
 `}
       </pre>
       <div className="whm-sigil-glow" />
