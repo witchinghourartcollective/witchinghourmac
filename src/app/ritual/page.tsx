@@ -13,6 +13,12 @@ export default function RitualLanding() {
       >
         Ritual 0001
       </Link>
+      <Link
+        href="/ritual/0002"
+        className="text-sm uppercase tracking-[0.35em] underline decoration-[#c7a24b] underline-offset-4 hover:opacity-90"
+      >
+        Ritual 0002
+      </Link>
     </main>
   );
 }
