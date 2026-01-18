@@ -1,4 +1,4 @@
-import PersonalSigil from "./components/PersonalSigil";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -19,7 +19,13 @@ export default function Home() {
         </p>
       </div>
 
-      <PersonalSigil />
+      <Image
+        src="/brand/sigil-primary.svg"
+        alt="Primary Sigil"
+        width={56}
+        height={56}
+        className="primary-sigil-soft"
+      />
     </main>
   );
 }
