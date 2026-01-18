@@ -76,6 +76,12 @@ main {
   display: block;
   height: 28px;
   width: 28px;
+  filter:
+    brightness(0.75)
+    contrast(1.1)
+    drop-shadow(0 0 6px rgba(0, 0, 0, 0.55))
+    drop-shadow(0 0 14px rgba(199, 255, 216, 0.35));
+  opacity: 0.85;
 }
 
 @media (max-width: 640px) {
@@ -199,6 +205,16 @@ main {
 
 .primary-sigil-footer img {
   display: block;
+  width: 140px;
+  height: auto;
+}
+
+.primary-sigil-soft {
+  filter:
+    brightness(1.25)
+    drop-shadow(0 0 10px rgba(199, 255, 216, 0.35))
+    drop-shadow(0 0 22px rgba(199, 255, 216, 0.25));
+  opacity: 0.75;
 }
 
 /* breathing */
