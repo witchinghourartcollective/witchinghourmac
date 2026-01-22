@@ -231,3 +231,16 @@ main {
   75% { transform: translate(0.4px, 0.4px); }
   100% { transform: translate(0, 0); }
 }
+body {
+  background-image: url("/brand/sigils/sigil-background.svg");
+  background-repeat: repeat;
+  background-size: 400px 400px;
+  background-attachment: fixed;
+}
+
+body {
+  background-image: url("/brand/sigils/sigil-background.svg");
+  background-repeat: repeat;
+  background-size: 400px 400px;
+  background-attachment: fixed;
+}

@@ -1,24 +1,20 @@
-import Link from "next/link";
-
-export default function RitualLanding() {
+export default function Ritual() {
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center gap-8 px-6 text-center">
-      <h1 className="text-sm tracking-[0.4em] uppercase opacity-80">
-        Rituals
-      </h1>
+    <main style={{ padding: 48, maxWidth: 900, margin: "0 auto" }}>
+      <h1>Ritual</h1>
 
-      <Link
-        href="/ritual/0001"
-        className="text-sm uppercase tracking-[0.35em] underline decoration-[#c7a24b] underline-offset-4 hover:opacity-90"
-      >
-        Ritual 0001
-      </Link>
-      <Link
-        href="/ritual/0002"
-        className="text-sm uppercase tracking-[0.35em] underline decoration-[#c7a24b] underline-offset-4 hover:opacity-90"
-      >
-        Ritual 0002
-      </Link>
+      <section>
+  <p>
+    A ritual is a repeated action that encodes intent.
+    In systems both digital and human, repetition creates structure.
+  </p>
+
+  <p>
+    This space documents the working rituals of Witching Hour —
+    creative, technical, and symbolic processes that bind intention to output.
+  </p>
+</section>
+
     </main>
   );
 }

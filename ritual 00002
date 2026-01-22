@@ -1,3 +1,4 @@
+  GNU nano 7.2                              codex/wallets/ethereum.md *
 # Ritual 001 — Invocation
 
 ## Purpose
@@ -10,6 +11,28 @@ or when a system has been rebuilt from instability.
 ## When to Perform
 - After infrastructure is stable
 - Before public launch or relaunch
+- When meaning has drifted from execution
+
+## Materials
+- A single sigil (canonical form)
+  GNU nano 7.2                              codex/wallets/ethereum.md *
+- A clean repository state
+- A deployable artifact (site, release, or system)
+
+## Steps
+1. Establish the spine
+   - Confirm the Codex exists on disk
+   - Confirm version control is active
+
+2. Place the sigil
+   - The sigil must be rendered without distortion
+   - Color and scale may change; geometry may not
+
+3. Name the work
+   - Declare the project name plainly
+   - Avoid modifiers, slogans, or hype
+   
+     GNU nano 7.2                                                                                        codex/wallets/ethereum.md *
 - When meaning has drifted from execution
 
 ## Materials
@@ -49,5 +72,9 @@ The ritual is complete when:
 ## Notes
 This ritual is not symbolic.
 It is a system reset that restores coherence.
+
+
+
+
 
 
