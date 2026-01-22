@@ -1,0 +1,25 @@
+* [33m033fa8e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfix/site-styles[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/fix/site-styles[m[33m, [m[1;31morigin/fix/header-sigil-calendar[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m, [m[1;32mfix/header-sigil-calendar[m[33m)[m Polish layout, pages, and docs; add agent rules
+* [33m4f9a5c2[m Update site styling, pages, sigils, and agent instructions
+* [33m5a30f42[m Add Google tag
+* [33mb05e7d9[m Remove debug colors and add header
+* [33ma986af7[m Fix app routing and cleanup
+* [33m961fd8b[m Update .devcontainer/devcontainer.json with new features
+* [33mcddff59[m Ignore experiments and duplicate app directory
+* [33mf0d2d9b[m Finalize sigils, styles, and site assets
+* [33ma7261c7[m Add Ritual 001 and canonical sigil specification
+* [33m271bbbf[m Add canonical sigil and Witching Hour color system
+* [33m1cd8639[m Lock canonical WHM sigil (exact, immutable)
+* [33m39472f1[m Animate sigil with pulse/vibration and add ritual About page
+* [33m6b5718b[m Add canonical sigil and Witching Hour color system
+* [33m4c1304f[m Add wallet codex and update dependencies
+* [33m53be709[m Add Ritual 001 and canonical sigil specification
+* [33mbe52448[m Add SLSA generic generator workflow
+* [33ma9acca5[m[33m ([m[1;33mtag: [m[1;33mv1.0.0[m[33m)[m Fix Tailwind v4 PostCSS + clean Next.js build
+* [33m88a4e43[m Fix build: remove unsupported Geist font
+* [33mab920c8[m Add Next.js dependencies
+* [33md46f885[m Update README.md
+*   [33m8106fc2[m Merge pull request #1 from witchinghourartcollective/witchinghourartcollective-patch-1
+[32m|[m[33m\[m  
+[32m|[m * [33mec9c0f5[m Update README.md
+[32m|[m[32m/[m  
+* [33m75f5415[m Initial commit

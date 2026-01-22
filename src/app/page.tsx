@@ -1,31 +1,40 @@
-import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center gap-10 px-6 text-center bg-transparent text-inherit">
-      <h1 className="text-3xl tracking-[0.3em] uppercase text-[#c7c7cc]">
-        Witching Hour
-      </h1>
+    <main style={{ padding: 48, maxWidth: 900, margin: "0 auto" }}>
+      <h1>Witching Hour</h1>
 
-      <div className="max-w-2xl space-y-4 text-sm opacity-85 leading-relaxed">
-        <p>
-          Witching Hour Music is a living system.
-          It is built from ritual, collaboration, and signal —
-          not branding, not content, not noise.
-        </p>
-        <p>
-          The sigils are not symbols.
-          They are alignment tools.
-        </p>
-      </div>
+      <p>
+        Welcome to the Witching Hour Music & Art Collective.
+      </p>
 
-      <Image
-        src="/brand/sigil-primary.svg"
-        alt="Primary Sigil"
-        width={56}
-        height={56}
-        className="primary-sigil-soft"
-      />
+<section>
+  <p>
+    Witching Hour is a signal — a convergence of sound, symbol, and system.
+    We work at the intersection of music, art, technology, and ritual,
+    building structures that speak both to the machine and the human.
+  </p>
+
+  <p>
+    This is not content for passive consumption. It is an invocation.
+    What you interact with here is meant to be used, altered, and carried forward.
+  </p>
+</section>
+
+
+      <hr />
+
+      <nav>
+        <ul style={{ lineHeight: "2em" }}>
+          <li><Link href="/ritual">Ritual</Link></li>
+          <li><Link href="/sigils">Sigils</Link></li>
+          <li><Link href="/about">About</Link></li>
+          <li><Link href="/calendar">Calendar</Link></li>
+          <li><Link href="/links">Links</Link></li>
+          <li><Link href="/dashboard">WAX Dashboard</Link></li>
+        </ul>
+      </nav>
     </main>
   );
 }

@@ -1,0 +1,43 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .line {
+        stroke: #8b5cf6;
+        stroke-width: 2;
+        fill: none;
+        opacity: 0.15;
+      }
+    </style>
+  </defs>
+
+  <circle cx="200" cy="200" r="160" class="line" />
+  <circle cx="200" cy="200" r="120" class="line" />
+  <circle cx="200" cy="200" r="80" class="line" />
+
+  <line x1="200" y1="40" x2="200" y2="360" class="line" />
+  <line x1="40" y1="200" x2="360" y2="200" class="line" />
+  <line x1="80" y1="80" x2="320" y2="320" class="line" />
+  <line x1="320" y1="80" x2="80" y2="320" class="line" />
+</svg>
+
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .line {
+        stroke: #8b5cf6;
+        stroke-width: 2;
+        fill: none;
+        opacity: 0.15;
+      }
+    </style>
+  </defs>
+
+  <circle cx="200" cy="200" r="160" class="line" />
+  <circle cx="200" cy="200" r="120" class="line" />
+  <circle cx="200" cy="200" r="80" class="line" />
+
+  <line x1="200" y1="40" x2="200" y2="360" class="line" />
+  <line x1="40" y1="200" x2="360" y2="200" class="line" />
+  <line x1="80" y1="80" x2="320" y2="320" class="line" />
+  <line x1="320" y1="80" x2="80" y2="320" class="line" />
+</svg>

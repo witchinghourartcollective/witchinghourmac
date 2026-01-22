@@ -1,14 +1,37 @@
 # Master Wallet Index
 
+> Canonical index of all known wallets across chains.
+> Detailed mappings live in chain-specific files.
+
+---
+
 ## Ethereum
-- 0xE435CcAE52D1a66D3Bd667EFf684923D845ffaDd — Ledger / cold / master
-- 0xae2eF7DDaCCfb07039bcF2c991026699236796D5 — UNKNOWN (needs mapping)
+
+- **0xE435CcAE52D1a66D3Bd667EFf684923D845ffaDd**
+  - Name: Ledger Master
+  - Type: Cold / Hardware
+  - Role: Primary custody
+  - Status: Active
+  - Notes: Canonical ETH wallet
+
+- **0xae2eF7DDaCCfb07039bcF2c991026699236796D5**
+  - Name: Unlabeled ETH Wallet
+  - Type: Unknown
+  - Role: Unknown
+  - Status: Needs mapping
+  - Notes: Investigate tx history & contracts
+
+---
 
 ## Solana
-- TBD
+- Status: Not indexed yet
+
+---
 
 ## TON
-- TBD
+- Status: Not indexed yet
+
+---
 
 ## EOS
-- TBD
+- Status: Not indexed yet
