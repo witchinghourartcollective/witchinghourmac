@@ -1,109 +1,106 @@
-# Witching Hour NFT — Mint Tiers, Utilities, and Lore
+# Witching Hour — Launchpad + Business Form Answers
 
-## Canon Supply x Price
+Below is exact copy-paste text for each field, tuned for Witching Hour in clear, credible language.
 
-- 333 -> 0.0333 ETH
-- 666 -> 0.0666 ETH
-- 777 -> 0.0777 ETH
-- 999 -> 0.0999 ETH
-- 369 (special) -> 0.0369 ETH
+## Project Name
 
-## Recommended Release Sequence
+Witching Hour: Art, Music & Utility NFTs
 
-1) Genesis — 333 @ 0.0333 ETH
-2) Alignment — 777 @ 0.0777 ETH
-3) Ritual — 666 @ 0.0666 ETH
-4) Completion — 999 @ 0.0999 ETH
-Special (anytime): Frequency — 369 @ 0.0369 ETH
+(Short, clean, sounds intentional.)
 
-Rationale:
+## Project Description (Elevator Pitch)
 
-- 333 first = platform-safe legitimacy + easy early traction
-- 777 second = expansion after proof-of-delivery
-- 666 third = edge without first-drop friction
-- 999 last = scale without diluting Genesis
-- 369 = experimental wildcard
+Witching Hour is a creative studio and collective blending music, visual art, and technology. The NFT collection functions as a membership and utility layer, granting holders access to exclusive music releases, studio sessions, digital art, physical drops, and collaborative opportunities. The project focuses on long-term creative value rather than short-term speculation.
 
----
+## Which chain is going to be used for issuing NFTs?
 
-## Utilities by Tier
+Base (Ethereum L2)
+(If Base is in the dropdown, choose it. If not, choose Ethereum and clarify Base in utilities if needed.)
 
-### Genesis — 333 @ 0.0333 ETH
+## Twitter Link
 
-- Founding member status
-- Early access to all future drops
-- Exclusive music releases (unreleased tracks, stems, demos)
-- Private Discord channels
-- Priority access to studio sessions and collaborations
-- Genesis-only visual identifiers
+Use your strongest, most active account. If it’s not “perfect,” that’s fine.
 
-### Alignment — 777 @ 0.0777 ETH
+Example:
 
-- All 333 utilities
-- Expanded music drops and collaborations
-- Priority for physical art and merch
-- Early access to events, showcases, and releases
-- Participation in select creative decisions
+https://twitter.com/witchinghourmac
 
-### Ritual — 666 @ 0.0666 ETH
+(or your main personal account if that’s where engagement actually is)
 
-- Experimental releases and alternate editions
-- Behind-the-scenes process content
-- Invite-only drops and collaborations
-- Special role inside the community (non-public)
+## Team
 
-### Completion — 999 @ 0.0999 ETH
+Founder & Creative Director:
 
-- Core music and art access
-- Eligibility for future upgrades and drops
-- Public-facing membership tier and long-term access
+Fletcher Vaughn (aka Fletch)
+Twitter: https://twitter.com/[yourhandle]
+LinkedIn: N/A
 
-### Frequency — 369 @ 0.0369 ETH (Special Drop)
+Collaborators are project-based artists and producers contributing to music, visual art, and development.
 
-- One-off utilities or art concepts
-- Cross-medium experiments (music x visual x tech)
-- Surprise mechanics
-- No guarantees, no roadmap promises
+(Simple > bloated.)
 
----
+## Roadmap / Past Milestones
 
-## Mint Page Paragraphs
+Past
 
-**Genesis — 333 @ 0.0333 ETH**
-Genesis holders form the foundation of Witching Hour. This tier grants early and priority access to music releases, private studio content, and future collaborations. Genesis keys are limited, permanent, and tied to the project’s origin—designed for those who enter before the doors open wider.
+- Established Witching Hour Music as an independent production studio
+- Released multiple music projects and collaborations
+- Built an engaged cross-platform creative audience
+- Developed initial NFT concepts and artwork
 
-**Alignment — 777 @ 0.0777 ETH**
-Alignment expands the circle. Holders gain access to ongoing releases, collaborations, physical drops, and select creative opportunities as Witching Hour grows. This tier represents momentum—where the project is active, visible, and evolving in real time.
+Upcoming
 
-**Ritual — 666 @ 0.0666 ETH**
-Ritual is the edge layer. This tier unlocks experimental releases, alternate art, behind-the-scenes process, and invite-only creative moments. It is intentionally selective and not designed for mass participation. Access is granted by intent, not hype.
+- Genesis NFT mint
+- Holder-exclusive music drops
+- Studio session access and collaborations
+- Physical art and merch integrations
+- Ongoing artist partnerships
 
-**Completion — 999 @ 0.0999 ETH**
-Completion is the open gate. Holders gain long-term access to the Witching Hour ecosystem, including music, art, and future utilities. This tier allows broader participation while preserving the integrity of earlier keys.
+## Key Partners / Relationship with Them
 
-**Frequency — 369 @ 0.0369 ETH (Special Drop)**
-Frequency is a transmission. Utilities, timing, and format vary per release. No roadmap, no guarantees—only signal. This tier exists for experimentation across sound, symbol, and technology.
+Independent artists, producers, and visual creators collaborating on music releases, artwork, and live or digital experiences. Partnerships are creator-driven and evolve per project.
+
+(Translation: real humans, not fake VC buzzwords.)
+
+## Influencers Onboard
+
+Early support from independent artists and creators within music and digital art communities. Influencer partnerships will be organic and utility-focused rather than paid hype campaigns.
+
+(This is a safe, honest answer.)
 
 ---
 
-## Tier Chart (Drop-in)
+## Business/Organization Info (Music Company)
 
-| Tier | Supply | Price (ETH) | Role |
-|---|---:|---:|---|
-| Genesis | 333 | 0.0333 | Foundation / Early Access |
-| Alignment | 777 | 0.0777 | Expansion / Momentum |
-| Ritual | 666 | 0.0666 | Experimental / Shadow Layer |
-| Completion | 999 | 0.0999 | Open Gate / Long-Term Access |
-| Frequency | 369 | 0.0369 | Experimental / Signal Drop |
+Name: Witching Hour Music (or official legal name if you have an LLC, e.g., Witching Hour Music, LLC)
 
----
+Industry/Category: Music Production / Recording / Artist Services / Entertainment
 
-## Descriptions
+Website: witchinghourmac.com
 
-### Platform-safe (launchpads / curators)
+Email: fletch@witchinghourmac.com (or your professional contact email)
 
-Witching Hour is a creative studio and collective using NFTs as a membership and access layer. The project focuses on music, visual art, and collaborative experiences, offering holders exclusive content, early access, and participation in a long-term creative ecosystem.
+Phone: your business number
 
-### Uncensored (site / Discord / lore)
+## Owner/Contact Info
 
-Witching Hour exists at the intersection of sound, symbol, and intention. Each drop is a key—some open doors, some unlock rooms, some are meant only for those willing to go deeper. This is not speculation. This is access.
+Owner / Representative Name: your name (Fletch) or the name you use professionally
+
+Title/Role: Founder / Music Producer / CEO
+
+## Address
+
+Use your business address (if you have one), or a mailing address.
+
+## Socials / Profiles
+
+Provide links to Spotify/UnitedMasters, YouTube, Instagram, TikTok, etc., if requested.
+
+## Description / About
+
+"Witching Hour Music is a music production and entertainment consulting company specializing in production, artist development, and creative services."
+
+## What to Watch For
+
+- If there are checkbox categories, pick all that apply (e.g., Music Production, Live Events, Artist Services).
+- If there’s a "What are you applying for?" field (grant/submit/sponsorship), tailor your answer to your goal.
