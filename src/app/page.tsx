@@ -20,6 +20,12 @@ export default function Home() {
     This is not content for passive consumption. It is an invocation.
     What you interact with here is meant to be used, altered, and carried forward.
   </p>
+
+  <p>
+    Our NFT layer is designed for long-term creative access: music, visuals,
+    studio sessions, and collaboration. See the About page for the live
+    framework and utilities.
+  </p>
 </section>
 
 
