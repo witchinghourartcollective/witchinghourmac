@@ -9,6 +9,20 @@ export default function PressPage() {
         </p>
       </section>
 
+      <section className="max-w-3xl w-full text-left border border-white/10 rounded-lg p-6 bg-white/5 space-y-3">
+        <h2 className="text-xl font-semibold text-center">Short Summary</h2>
+        <p>
+          Witching Hour is a creative studio and collective using NFTs as a
+          membership and utility layer. Holders gain access to exclusive music,
+          visual art, studio sessions, and collaborative opportunities rooted in
+          long-term creative value.
+        </p>
+        <p>
+          Witching Hour is the moment where sound, symbol, and intention align—
+          each token a key to creative access, collaboration, and ritual.
+        </p>
+      </section>
+
       <section className="max-w-3xl w-full space-y-4 text-left">
         <h2 className="text-xl font-semibold text-center">Project Name</h2>
         <p>Witching Hour: Art, Music &amp; Utility NFTs</p>
