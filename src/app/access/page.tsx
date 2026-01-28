@@ -1,45 +1,65 @@
-const accessLink = ""; // TODO: add NativeForms or Discord invite URL
+import Link from "next/link";
 
 export default function AccessPage() {
   return (
-    <main className="min-h-screen flex flex-col items-center gap-10 px-6 py-16 text-center">
-      <section className="max-w-3xl space-y-6">
-        <p className="text-sm uppercase tracking-[0.35em] opacity-80">Access</p>
-        <h1 className="text-3xl sm:text-4xl font-semibold">Enter the Witching Hour</h1>
-        <p className="text-lg">This is not a mint page. This is an access point.</p>
-      </section>
+    <main className="mx-auto max-w-3xl px-6 py-24">
+      <h1 className="text-4xl font-bold mb-4">Enter the Witching Hour</h1>
+      <p className="text-lg opacity-80 mb-8">
+        This is not a mint page.<br />
+        This is an access point.
+      </p>
 
-      <section className="max-w-3xl w-full space-y-4 text-left border border-white/10 rounded-lg p-6 bg-white/5">
+      <div className="space-y-6 text-base leading-relaxed">
         <p>
           Witching Hour exists at the intersection of sound, symbol, and intention.
-          Each release is a key - some open doors, some unlock rooms, some are meant
+          Each release is a key—some open doors, some unlock rooms, some are meant
           only for those willing to go deeper.
         </p>
-        <p>
-          The Genesis drop is limited to 333 keys. There will not be more.
-        </p>
-        <p>
-          Holding a Witching Hour token grants access to exclusive music, visual
-          art, studio sessions, and collaborative opportunities as the project
-          evolves. This is not speculation. This is participation.
-        </p>
-        <p>
-          If you are here for hype, you are early in the wrong way. If you are here
-          for access, you are on time.
-        </p>
-      </section>
 
-      <section className="max-w-3xl w-full space-y-4 text-center">
-        <a
-          className="inline-flex items-center justify-center rounded-md border border-white/20 px-6 py-3"
-          href={accessLink || "#"}
+        <p>
+          The Genesis drop is limited to <strong>333 keys</strong>.
+          There will not be more.
+        </p>
+
+        <p>
+          Holding a Witching Hour token grants access to exclusive music,
+          visual art, studio sessions, and collaborative opportunities
+          as the project evolves.
+        </p>
+
+        <p className="font-semibold">
+          This is not speculation.<br />
+          This is access.
+        </p>
+
+        <p className="opacity-80">
+          If you’re here for hype, you’re early in the wrong way.<br />
+          If you’re here for access, you’re on time.
+        </p>
+      </div>
+
+      <div className="mt-10 flex flex-col sm:flex-row gap-4">
+        {/* PRIMARY CTA */}
+        <Link
+          href="https://f.nativeforms.com/YTMuV1M41jZmoUYtdTUq1Db"
+          className="inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold bg-black text-white hover:opacity-90"
         >
           Request Genesis Access
-        </a>
-        <p className="text-sm opacity-80">
-          Genesis: 333 @ 0.0333 ETH. Minting soon on Base via Zora.
-        </p>
-      </section>
+        </Link>
+
+        {/* SECONDARY CTA (disabled until mint) */}
+        <button
+          disabled
+          className="inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold border opacity-40 cursor-not-allowed"
+        >
+          Genesis Mint — Coming Soon
+        </button>
+      </div>
+
+      <footer className="mt-12 text-sm opacity-70">
+        Genesis: <strong>333 @ 0.0333 ETH</strong><br />
+        Minting on Base via Zora
+      </footer>
     </main>
   );
 }
