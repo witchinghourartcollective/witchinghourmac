@@ -17,6 +17,8 @@ export default function Header() {
       <nav>
         <Link href="/about">About</Link>
         <Link href="/nft">NFT</Link>
+        <Link href="/mint">Mint</Link>
+        <Link href="/litepaper">Litepaper</Link>
         <Link href="/press">Press</Link>
         <Link href="/ritual">Ritual</Link>
         <Link href="/calendar">Calendar</Link>
