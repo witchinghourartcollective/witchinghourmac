@@ -8,14 +8,41 @@ export default function MintPage() {
           Select your tier. Each number is intentional and aligned to a distinct
           access profile. One number per drop. No mixing.
         </p>
+      </section>
+
+      <section className="max-w-3xl w-full space-y-4 text-left border border-white/10 rounded-lg p-6 bg-white/5">
+        <h2 className="text-xl font-semibold text-center">Genesis CTA (Pre-mint)</h2>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <a className="rounded-md border border-white/20 px-4 py-2" href="/press">
-            Press Kit
+          <a className="rounded-md border border-white/20 px-4 py-2" href="/access">
+            Access
           </a>
-          <a className="rounded-md border border-white/20 px-4 py-2" href="/litepaper">
-            Litepaper
+          <span className="rounded-md border border-white/10 px-4 py-2 opacity-70">
+            Genesis Mint — Coming Soon
+          </span>
+        </div>
+        <p className="text-center opacity-80">
+          Canon decision: Access before mint. No fake mint buttons.
+        </p>
+      </section>
+
+      <section className="max-w-3xl w-full space-y-4 text-left border border-white/10 rounded-lg p-6 bg-white/5">
+        <h2 className="text-xl font-semibold text-center">Genesis CTA (Post-mint)</h2>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <a
+            className="rounded-md border border-white/20 px-4 py-2"
+            href="https://zora.co/collect/base:0x..."
+            target="_blank"
+            rel="noreferrer"
+          >
+            Mint Genesis (333)
+          </a>
+          <a className="rounded-md border border-white/20 px-4 py-2" href="/access">
+            Enter the Witching Hour
           </a>
         </div>
+        <p className="text-center opacity-80">
+          Swap in the real Zora URL when live.
+        </p>
       </section>
 
       <section className="max-w-4xl w-full grid gap-6 sm:grid-cols-2 text-left">
