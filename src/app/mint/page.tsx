@@ -8,6 +8,14 @@ export default function MintPage() {
           Select your tier. Each number is intentional and aligned to a distinct
           access profile. One number per drop. No mixing.
         </p>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <a className="rounded-md border border-white/20 px-4 py-2" href="/press">
+            Press Kit
+          </a>
+          <a className="rounded-md border border-white/20 px-4 py-2" href="/litepaper">
+            Litepaper
+          </a>
+        </div>
       </section>
 
       <section className="max-w-4xl w-full grid gap-6 sm:grid-cols-2 text-left">
@@ -75,7 +83,7 @@ export default function MintPage() {
         </div>
       </section>
 
-      <section className="max-w-3xl w-full space-y-4 text-left">
+      <section className="max-w-3xl w-full space-y-4 text-left border border-white/10 rounded-lg p-6 bg-white/5">
         <h2 className="text-xl font-semibold text-center">Special Drop</h2>
         <div className="border border-white/10 rounded-lg p-5 bg-white/5">
           <h3 className="text-lg font-semibold">Frequency</h3>

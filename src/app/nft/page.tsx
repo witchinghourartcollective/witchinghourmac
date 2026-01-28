@@ -14,9 +14,17 @@ export default function NftPage() {
           Witching Hour is the moment where sound, symbol, and intention align -
           each token a key to creative access, collaboration, and ritual.
         </p>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <a className="rounded-md border border-white/20 px-4 py-2" href="/mint">
+            View Mint Tiers
+          </a>
+          <a className="rounded-md border border-white/20 px-4 py-2" href="/litepaper">
+            Read Litepaper
+          </a>
+        </div>
       </section>
 
-      <section className="max-w-3xl w-full space-y-4 text-left">
+      <section className="max-w-3xl w-full space-y-4 text-left border border-white/10 rounded-lg p-6 bg-white/5">
         <h2 className="text-xl font-semibold text-center">Locked Numbers</h2>
         <p className="text-center">
           Pick one per drop. These are intentional, symbolic, and platform-safe.
@@ -30,7 +38,7 @@ export default function NftPage() {
         </ul>
       </section>
 
-      <section className="max-w-3xl w-full space-y-4 text-left">
+      <section className="max-w-3xl w-full space-y-4 text-left border border-white/10 rounded-lg p-6 bg-white/5">
         <h2 className="text-xl font-semibold text-center">Utilities</h2>
         <ul className="space-y-2">
           <li>Access to exclusive music releases and unreleased tracks</li>
@@ -41,7 +49,7 @@ export default function NftPage() {
         </ul>
       </section>
 
-      <section className="max-w-3xl w-full space-y-4 text-left">
+      <section className="max-w-3xl w-full space-y-4 text-left border border-white/10 rounded-lg p-6 bg-white/5">
         <h2 className="text-xl font-semibold text-center">Final Drop Structure</h2>
         <div className="space-y-6">
           <div>

@@ -11,7 +11,7 @@ export default function LitepaperPage() {
         </p>
       </section>
 
-      <section className="max-w-3xl w-full space-y-4 text-left">
+      <section className="max-w-3xl w-full space-y-4 text-left border border-white/10 rounded-lg p-6 bg-white/5">
         <h2 className="text-xl font-semibold text-center">Thesis</h2>
         <p>
           Witching Hour is the moment where sound, symbol, and intention align.
@@ -21,7 +21,7 @@ export default function LitepaperPage() {
         </p>
       </section>
 
-      <section className="max-w-3xl w-full space-y-4 text-left">
+      <section className="max-w-3xl w-full space-y-4 text-left border border-white/10 rounded-lg p-6 bg-white/5">
         <h2 className="text-xl font-semibold text-center">Utility Layer</h2>
         <ul className="space-y-2">
           <li>Exclusive music releases and unreleased tracks</li>
@@ -32,7 +32,7 @@ export default function LitepaperPage() {
         </ul>
       </section>
 
-      <section className="max-w-3xl w-full space-y-4 text-left">
+      <section className="max-w-3xl w-full space-y-4 text-left border border-white/10 rounded-lg p-6 bg-white/5">
         <h2 className="text-xl font-semibold text-center">Tier System</h2>
         <p>One number per drop. Each tier has a distinct identity.</p>
         <ul className="space-y-2">
@@ -44,7 +44,7 @@ export default function LitepaperPage() {
         </ul>
       </section>
 
-      <section className="max-w-3xl w-full space-y-4 text-left">
+      <section className="max-w-3xl w-full space-y-4 text-left border border-white/10 rounded-lg p-6 bg-white/5">
         <h2 className="text-xl font-semibold text-center">Release Logic</h2>
         <ul className="space-y-2">
           <li>333 first = trust and legitimacy</li>
@@ -55,7 +55,7 @@ export default function LitepaperPage() {
         </ul>
       </section>
 
-      <section className="max-w-3xl w-full space-y-4 text-left">
+      <section className="max-w-3xl w-full space-y-4 text-left border border-white/10 rounded-lg p-6 bg-white/5">
         <h2 className="text-xl font-semibold text-center">Distribution</h2>
         <ul className="space-y-2">
           <li>Chain: Base (Ethereum L2)</li>
@@ -64,7 +64,7 @@ export default function LitepaperPage() {
         </ul>
       </section>
 
-      <section className="max-w-3xl w-full space-y-4 text-left">
+      <section className="max-w-3xl w-full space-y-4 text-left border border-white/10 rounded-lg p-6 bg-white/5">
         <h2 className="text-xl font-semibold text-center">Principles</h2>
         <ul className="space-y-2">
           <li>Creator-first utility, not hype-first marketing</li>
