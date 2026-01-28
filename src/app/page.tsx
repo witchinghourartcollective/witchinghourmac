@@ -40,6 +40,7 @@ export default function Home() {
           <li><Link href="/mint">Mint</Link></li>
           <li><Link href="/litepaper">Litepaper</Link></li>
           <li><Link href="/press">Press</Link></li>
+          <li><Link href="/access">Access</Link></li>
           <li><Link href="/calendar">Calendar</Link></li>
           <li><Link href="/links">Links</Link></li>
           <li><Link href="/dashboard">WAX Dashboard</Link></li>
