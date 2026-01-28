@@ -43,3 +43,5 @@ next-env.d.ts
 # experiments / external repos
 evolving-cellular-automata/
 app/
+!src/app/
+!src/app/**
