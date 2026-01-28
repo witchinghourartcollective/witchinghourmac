@@ -20,6 +20,7 @@ export default function Header() {
         <Link href="/mint">Mint</Link>
         <Link href="/litepaper">Litepaper</Link>
         <Link href="/press">Press</Link>
+        <Link href="/access">Access</Link>
         <Link href="/ritual">Ritual</Link>
         <Link href="/calendar">Calendar</Link>
         <Link href="/links">Links</Link>

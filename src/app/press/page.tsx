@@ -41,6 +41,44 @@ export default function PressPage() {
       </section>
 
       <section className="max-w-3xl w-full space-y-4 text-left">
+        <h2 className="text-xl font-semibold text-center">Zora Genesis Listing</h2>
+        <div className="space-y-2">
+          <p><strong>Collection Name:</strong> Witching Hour - Genesis</p>
+          <p>
+            <strong>Short Description:</strong> A creative studio and collective
+            using NFTs as a membership and access layer for music, visual art, and
+            collaborative experiences.
+          </p>
+          <p>
+            <strong>Full Description:</strong> Witching Hour is a long-term
+            creative project centered on music, visual art, and collaboration.
+            NFTs function as keys - granting holders access to exclusive releases,
+            private content, studio sessions, and future opportunities. The
+            Genesis collection is limited to 333 tokens, permanently fixed. These
+            keys represent early access and foundational membership within the
+            Witching Hour ecosystem. This project prioritizes creative value over
+            speculation and is designed to evolve alongside its community.
+          </p>
+          <p><strong>Chain:</strong> Base (Ethereum L2)</p>
+          <p><strong>Edition Size:</strong> 333</p>
+          <p><strong>Price:</strong> 0.0333 ETH</p>
+          <p><strong>Tags:</strong> music, art, collective, access, base, experimental</p>
+        </div>
+      </section>
+
+      <section className="max-w-3xl w-full space-y-4 text-left">
+        <h2 className="text-xl font-semibold text-center">Zora Drop Strategy</h2>
+        <p>One Zora collection per drop. No confusion, no dilution.</p>
+        <ul className="space-y-2">
+          <li>Drop I - Genesis: 333 @ 0.0333 ETH (foundational access)</li>
+          <li>Drop II - Alignment: 777 @ 0.0777 ETH (expanded access)</li>
+          <li>Drop III - Ritual: 666 @ 0.0666 ETH (experimental, invite-first)</li>
+          <li>Drop IV - Completion: 999 @ 0.0999 ETH (broad access)</li>
+          <li>Special - Frequency: 369 @ 0.0369 ETH (surprise drops)</li>
+        </ul>
+      </section>
+
+      <section className="max-w-3xl w-full space-y-4 text-left">
         <h2 className="text-xl font-semibold text-center">Chain</h2>
         <p>
           Base (Ethereum L2). If Base is not in a dropdown, select Ethereum and
