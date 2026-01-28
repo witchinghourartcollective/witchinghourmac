@@ -37,6 +37,8 @@ export default function Home() {
           <li><Link href="/sigils">Sigils</Link></li>
           <li><Link href="/about">About</Link></li>
           <li><Link href="/nft">NFT</Link></li>
+          <li><Link href="/mint">Mint</Link></li>
+          <li><Link href="/litepaper">Litepaper</Link></li>
           <li><Link href="/press">Press</Link></li>
           <li><Link href="/calendar">Calendar</Link></li>
           <li><Link href="/links">Links</Link></li>
