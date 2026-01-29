@@ -17,10 +17,10 @@
     "@upstash/redis": "^1.34.3",
     "@vercel/analytics": "^1.6.1",
     "@vercel/speed-insights": "^1.3.1",
-    "@waxio/waxjs": "^0.0.15",
+    "@waxio/waxjs": "^1.7.1",
     "ai": "^6.0.38",
     "dotenv": "^17.2.3",
-    "next": "^14.2.35",
+    "next": "^16.1.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tsx": "^4.21.0",
@@ -36,6 +36,9 @@
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.18",
     "typescript": "5.9.3"
+  },
+  "overrides": {
+    "elliptic": "6.6.1"
   },
   "description": "witching hour music",
   "main": "next.config.js",
