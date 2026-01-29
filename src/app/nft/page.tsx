@@ -1,3 +1,5 @@
+import { track } from "@/lib/track";
+
 export default function NftPage() {
   return (
     <main className="min-h-screen flex flex-col items-center gap-10 px-6 py-16 text-center">
@@ -15,10 +17,28 @@ export default function NftPage() {
           each token a key to creative access, collaboration, and ritual.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <a className="rounded-md border border-white/20 px-4 py-2" href="/mint">
+          <a
+            className="rounded-md border border-white/20 px-4 py-2"
+            href="/mint"
+            onClick={() =>
+              track("cta_click", {
+                location: "nft_page",
+                state: "pre_mint",
+              })
+            }
+          >
             View Mint Tiers
           </a>
-          <a className="rounded-md border border-white/20 px-4 py-2" href="/litepaper">
+          <a
+            className="rounded-md border border-white/20 px-4 py-2"
+            href="/litepaper"
+            onClick={() =>
+              track("cta_click", {
+                location: "nft_page",
+                state: "info",
+              })
+            }
+          >
             Read Litepaper
           </a>
         </div>
