@@ -27,10 +27,11 @@ body::before {
   inset: 0;
   background-image: url("/brand/sigil-primary.svg");
   background-repeat: repeat;
-  background-size: 240px 240px;
-  opacity: 0.045;
+  background-size: 260px 260px;
+  opacity: 0.08;
   pointer-events: none;
   z-index: 0;
+  filter: drop-shadow(0 0 6px rgba(220, 220, 220, 0.18));
 }
 
 main {
@@ -74,14 +75,14 @@ main {
 
 .primary-sigil-mark {
   display: block;
-  height: 28px;
-  width: 28px;
+  height: 40px;
+  width: 40px;
   filter:
-    brightness(0.75)
+    brightness(0.9)
     contrast(1.1)
     drop-shadow(0 0 6px rgba(0, 0, 0, 0.55))
-    drop-shadow(0 0 14px rgba(199, 255, 216, 0.35));
-  opacity: 0.85;
+    drop-shadow(0 0 16px rgba(220, 220, 220, 0.55));
+  opacity: 0.95;
 }
 
 @media (max-width: 640px) {

@@ -8,8 +8,8 @@ export default function Header() {
         <Image
           src="/brand/sigil-primary.svg"
           alt="Primary Sigil"
-          width={28}
-          height={28}
+          width={40}
+          height={40}
           className="primary-sigil-mark"
         />
       </Link>
