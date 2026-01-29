@@ -45,3 +45,4 @@ evolving-cellular-automata/
 app/
 !src/app/
 !src/app/**
+.env*.local
