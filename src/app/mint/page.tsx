@@ -1,3 +1,6 @@
+import MintCTA from "@/components/MintCTA";
+import { track } from "@/lib/track";
+
 export default function MintPage() {
   return (
     <main className="min-h-screen flex flex-col items-center gap-10 px-6 py-16 text-center">
@@ -13,7 +16,16 @@ export default function MintPage() {
       <section className="max-w-3xl w-full space-y-4 text-left border border-white/10 rounded-lg p-6 bg-white/5">
         <h2 className="text-xl font-semibold text-center">Genesis CTA (Pre-mint)</h2>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <a className="rounded-md border border-white/20 px-4 py-2" href="/access">
+          <a
+            className="rounded-md border border-white/20 px-4 py-2"
+            href="/access"
+            onClick={() =>
+              track("cta_click", {
+                location: "mint_page",
+                state: "pre_mint",
+              })
+            }
+          >
             Access
           </a>
           <span className="rounded-md border border-white/10 px-4 py-2 opacity-70">
@@ -28,20 +40,31 @@ export default function MintPage() {
       <section className="max-w-3xl w-full space-y-4 text-left border border-white/10 rounded-lg p-6 bg-white/5">
         <h2 className="text-xl font-semibold text-center">Genesis CTA (Post-mint)</h2>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <div
+            onClick={() =>
+              track("mint_click", {
+                location: "mint_page",
+                state: "post_mint",
+              })
+            }
+          >
+            <MintCTA />
+          </div>
           <a
             className="rounded-md border border-white/20 px-4 py-2"
-            href="https://zora.co/collect/base:0x..."
-            target="_blank"
-            rel="noreferrer"
+            href="/access"
+            onClick={() =>
+              track("cta_click", {
+                location: "mint_page",
+                state: "post_mint",
+              })
+            }
           >
-            Mint Genesis (333)
-          </a>
-          <a className="rounded-md border border-white/20 px-4 py-2" href="/access">
             Enter the Witching Hour
           </a>
         </div>
         <p className="text-center opacity-80">
-          Swap in the real Zora URL when live.
+          Swap in the real Zora URL when live via NEXT_PUBLIC_GENESIS_MINT_URL.
         </p>
       </section>
 

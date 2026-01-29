@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { track } from "@/lib/track";
 
 export default function AccessPage() {
   return (
@@ -42,6 +43,12 @@ export default function AccessPage() {
         {/* PRIMARY CTA */}
         <Link
           href="https://f.nativeforms.com/YTMuV1M41jZmoUYtdTUq1Db"
+          onClick={() =>
+            track("cta_click", {
+              location: "access_page",
+              state: "pre_mint",
+            })
+          }
           className="inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold bg-black text-white hover:opacity-90"
         >
           Request Genesis Access
