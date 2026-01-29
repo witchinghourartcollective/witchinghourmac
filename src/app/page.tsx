@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -15,6 +16,16 @@ export default function Home() {
     We work at the intersection of music, art, technology, and ritual,
     building structures that speak both to the machine and the human.
   </p>
+
+  <div className="whm-sigil-solid-wrap" aria-hidden="true">
+    <Image
+      src="/brand/sigils/whm-sigil.svg"
+      alt="WHM Sigil"
+      width={420}
+      height={220}
+      className="whm-sigil-solid"
+    />
+  </div>
 
   <p>
     This is not content for passive consumption. It is an invocation.
