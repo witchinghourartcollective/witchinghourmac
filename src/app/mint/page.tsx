@@ -1,3 +1,5 @@
+"use client";
+
 import MintCTA from "@/components/MintCTA";
 import { track } from "@/lib/track";
 

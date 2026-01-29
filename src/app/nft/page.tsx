@@ -1,3 +1,5 @@
+"use client";
+
 import { track } from "@/lib/track";
 
 export default function NftPage() {
