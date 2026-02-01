@@ -1,7 +1,7 @@
-fletchervaughn@pop-os:~$ sudo virsh edit hiveos
+[host]$ sudo virsh edit hiveos
 Domain 'hiveos' XML configuration edited.
 
-fletchervaughn@pop-os:~$  sudo virsh start hiveos
+[host]$  sudo virsh start hiveos
   sudo virsh dumpxml hiveos | rg -n "target dev|bus="
 Domain 'hiveos' started
 
@@ -39,7 +39,7 @@ Domain 'hiveos' started
 212:      <address type='pci' domain='0x0000' bus='0x05' slot='0x00' function='0x0'/>
 217:      <address type='pci' domain='0x0000' bus='0x06' slot='0x00' function='0x0'/>
 
-fletchervaughn@pop-os:~$   sudo virsh console hiveos
+[host]$   sudo virsh console hiveos
 Connected to domain 'hiveos'
 Escape character is ^] (Ctrl + ])]
 
@@ -91,7 +91,7 @@ If you tell me those, I’ll give you the exact most-profitable coin (today) and
 ---
 
 Additional log (user):
-fletchervaughn@pop-os:~$  sudo virsh start hiveos
+[host]$  sudo virsh start hiveos
   sudo virsh dumpxml hiveos | rg -n "target dev|bus="
 Domain 'hiveos' started
 
@@ -184,3 +184,32 @@ $ virsh dumpxml hiveos | rg -n "interface|network|bridge|mac"
 
 $ virsh console hiveos
 error: failed to get domain 'hiveos'
+
+---
+
+Additional log (sanitized):
+$ sudo virsh net-dumpxml hiveos-net
+$ sudo virsh net-start hiveos-net
+$ sudo virsh net-info hiveos-net
+<network>
+  <name>hiveos-net</name>
+  <uuid>[REDACTED]</uuid>
+  <bridge name='virbr2' stp='on' delay='0'/>
+  <mac address='[REDACTED]'/>
+  <ip address='192.168.126.1' netmask='255.255.255.0'>
+    <dhcp>
+      <range start='192.168.126.100' end='192.168.126.254'/>
+    </dhcp>
+  </ip>
+</network>
+
+error: Failed to start network hiveos-net
+error: internal error: Child process (VIR_BRIDGE_NAME=virbr2 /usr/sbin/dnsmasq --conf-file=/var/lib/libvirt/dnsmasq/hiveos-net.conf --leasefile-ro --dhcp-script=/usr/lib/libvirt/libvirt_leaseshelper) unexpected exit status 2:
+dnsmasq: failed to create listening socket for 192.168.126.1: Address already in use
+
+Name:           hiveos-net
+UUID:           [REDACTED]
+Active:         no
+Persistent:     yes
+Autostart:      yes
+Bridge:         virbr2
