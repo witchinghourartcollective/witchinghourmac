@@ -103,3 +103,84 @@ Domain 'hiveos' started
 70:      <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x2'/>
 76:      <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x3'/>
 82:      <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x4'/>
+
+---
+
+Additional log (sanitized):
+$ sudo virsh domifaddr hiveos
+$ sudo virsh dumpxml hiveos | rg -n "hostdev|vfio|graphics|video|target dev|bus="
+Name       MAC address          Protocol     Address
+-------------------------------------------------------------------------------
+
+43:      <target dev='sda' bus='sata'/>
+45:      <address type='drive' controller='0' bus='0' target='0' unit='0'/>
+49:      <address type='pci' domain='0x0000' bus='0x02' slot='0x00' function='0x0'/>
+58:      <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x0' multifunction='on'/>
+64:      <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x1'/>
+70:      <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x2'/>
+76:      <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x3'/>
+82:      <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x4'/>
+88:      <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x5'/>
+94:      <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x6'/>
+100:      <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x7'/>
+106:      <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0' multifunction='on'/>
+112:      <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x1'/>
+118:      <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x2'/>
+124:      <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x3'/>
+130:      <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x4'/>
+136:      <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x5'/>
+140:      <address type='pci' domain='0x0000' bus='0x00' slot='0x1f' function='0x2'/>
+144:      <address type='pci' domain='0x0000' bus='0x03' slot='0x00' function='0x0'/>
+150:      <address type='pci' domain='0x0000' bus='0x01' slot='0x00' function='0x0'/>
+168:      <address type='virtio-serial' controller='0' bus='0' port='1'/>
+173:      <address type='virtio-serial' controller='0' bus='0' port='2'/>
+175:    <input type='tablet' bus='usb'>
+177:      <address type='usb' bus='0' port='1'/>
+179:    <input type='mouse' bus='ps2'>
+182:    <input type='keyboard' bus='ps2'>
+185:    <graphics type='spice' port='5900' autoport='yes' listen='127.0.0.1'>
+188:    </graphics>
+191:      <address type='pci' domain='0x0000' bus='0x00' slot='0x1b' function='0x0'/>
+194:    <video>
+196:      <alias name='video0'/>
+197:      <address type='pci' domain='0x0000' bus='0x00' slot='0x01' function='0x0'/>
+198:    </video>
+199:    <redirdev bus='usb' type='spicevmc'>
+201:      <address type='usb' bus='0' port='2'/>
+203:    <redirdev bus='usb' type='spicevmc'>
+205:      <address type='usb' bus='0' port='3'/>
+212:      <address type='pci' domain='0x0000' bus='0x05' slot='0x00' function='0x0'/>
+217:      <address type='pci' domain='0x0000' bus='0x06' slot='0x00' function='0x0'/>
+
+$ virsh list --all
+Id   Name     State
+------------------------
+1    hiveos   running
+
+$ virsh domstate hiveos
+running
+
+$ virsh domiflist hiveos
+Interface   Type   Source   Model    MAC
+---------------------------------------------------------
+-           user   -        virtio   [REDACTED]
+
+$ virsh net-list --all
+Name         State      Autostart   Persistent
+-------------------------------------------------
+default      inactive   yes         yes
+hiveos-net   inactive   yes         yes
+
+$ virsh net-dhcp-leases default
+Expiry Time   MAC address   Protocol   IP address   Hostname   Client ID or DUID
+-----------------------------------------------------------------------------------
+
+$ virsh dumpxml hiveos | rg -n "interface|network|bridge|mac"
+13:    <partition>/machine</partition>
+16:    <type arch='x86_64' machine='pc-q35-8.2'>hvm</type>
+146:    <interface type='user'>
+147:      <mac address='[REDACTED]'/>
+151:    </interface>
+
+$ virsh console hiveos
+error: failed to get domain 'hiveos'
