@@ -42,3 +42,48 @@ Domain 'hiveos' started
 fletchervaughn@pop-os:~$   sudo virsh console hiveos
 Connected to domain 'hiveos'
 Escape character is ^] (Ctrl + ])]
+
+---
+
+What you likely need next to mine from the VM (high-level checklist):
+- Confirm GPU passthrough or compute device visibility inside the VM (HiveOS should see the GPU).
+- Ensure the VM has network + time sync (HiveOS needs outbound access to its API and pool).
+- Register the worker in HiveOS (farm/rig token) and apply a flight sheet.
+- Verify storage: the VM disk you attached as sda is persistent and has HiveOS installed/bootable.
+- Optional: pin CPU cores/memory hugepages if you’re doing CPU mining or want stable hashrate.
+
+Short answer: “most profitable” depends entirely on your hardware and electricity cost, and it changes daily. We should pick a target after we know your GPU/CPU and $/kWh, then use a live calculator (WhatToMine/NiceHash) to choose the top coin for your exact rig. (whattomine.com (https://whattomine.com/?utm_source=openai))
+
+That said, by hardware type:
+- BTC: effectively ASIC-only. GPUs/CPUs won’t be competitive.
+- XMR (Monero): CPU-mining (RandomX). GPUs aren’t efficient.
+- Ravencoin (RVN): GPU-mining (KawPoW).
+- TON: uses a PoW “giver” distribution mechanism; typically big CPU (32+ cores) or GPU with extra setup; ASICs aren’t used. (ton.me (https://ton.me/en/mining/?utm_source=openai))
+
+So:
+- If you passed through a GPU to HiveOS, RVN (and other GPU coins) are candidates.
+- If you only have CPU in the VM, XMR or TON (if you have a very strong CPU) are candidates.
+- If you want BTC, you’d need an ASIC attached/passthrough.
+
+---
+
+What we need next to mine from the VM:
+1) Confirm GPU passthrough works in the HiveOS VM (or confirm you’re CPU-only).
+2) Register the rig in HiveOS and apply a flight sheet.
+3) Pick the most profitable coin with a live calculator using your exact hardware + $/kWh.
+4) Start the miner and verify hashrate + temps.
+
+HiveOS flight sheet basics are standard: create Wallet -> create Flight Sheet -> apply to worker. (hiveon.com (https://hiveon.com/knowledge-base/guides/how_to_start_mine_in_hiveon_os/?utm_source=openai))
+
+---
+
+I need these from you to choose the best coin:
+- GPU model(s) (e.g., 3080, 3070, 1660, etc.)
+- CPU model (if you want CPU mining)
+- Electricity cost ($/kWh)
+- Power limit you want to run (if you know)
+- Is GPU passthrough actually visible inside HiveOS?
+
+If you tell me those, I’ll give you the exact most-profitable coin (today) and the flight sheet settings. (whattomine.com (https://whattomine.com/?utm_source=openai))
+
+1-4
