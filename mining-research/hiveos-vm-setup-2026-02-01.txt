@@ -213,3 +213,49 @@ Active:         no
 Persistent:     yes
 Autostart:      yes
 Bridge:         virbr2
+
+---
+
+2026-02-02 (VM networking fix + HiveOS registration notes)
+
+Goal: Get HiveOS VM online (NAT) and registered without Wi-Fi.
+
+Host changes (libvirt):
+1) Create/modify hiveos-net on a new subnet and bridge:
+   - Network: 192.168.200.0/24
+   - Bridge: virbr9
+   - DNS disabled (host has named on :53)
+   - NAT enabled (forward mode nat)
+
+2) Switch VM NIC to e1000e (HiveOS didn't see virtio NIC):
+   - VM XML: <model type='e1000e'/>
+
+3) Start hiveos-net and attach VM to it.
+
+4) Allow forwarding on host (nftables):
+   - Insert accept rules before reject:
+     sudo nft insert rule ip filter FORWARD iifname "virbr9" oifname != "virbr9" accept
+     sudo nft insert rule ip filter FORWARD oifname "virbr9" ct state related,established accept
+   - Confirm ip_forward is enabled:
+     sudo sysctl net.ipv4.ip_forward
+
+5) Bring bridge up:
+   - sudo ip link set virbr9 up
+
+VM (HiveOS) networking:
+- NIC appears as eth0 (altname enp1s0).
+- If DHCP fails, set static:
+  ip addr flush dev eth0
+  ip addr add 192.168.200.122/24 dev eth0
+  ip link set eth0 up
+  ip route add default via 192.168.200.1
+  printf "nameserver 1.1.1.1\nnameserver 8.8.8.8\n" > /etc/resolv.conf
+  ping -c 2 api.hiveos.farm
+
+HiveOS registration:
+- Use new Rig ID + password.
+- Wi-Fi setup skipped (no wlan0).
+
+Status at end:
+- VM can ping 1.1.1.1 and api.hiveos.farm after host forward rules.
+- DNS on host is owned by named; keep libvirt DNS disabled.
