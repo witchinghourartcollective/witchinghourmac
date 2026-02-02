@@ -259,3 +259,29 @@ HiveOS registration:
 Status at end:
 - VM can ping 1.1.1.1 and api.hiveos.farm after host forward rules.
 - DNS on host is owned by named; keep libvirt DNS disabled.
+
+---
+
+2026-02-02 (XMRig mining on host)
+
+Pool + wallet:
+- Pool: pool.supportxmr.com:3333
+- Wallet: 48APt2bFceYSBQyizrdwPn29tgHQLnKWcYXXCB7cucjBd5AzoG39X6FGkiDrANpq5hTct4drg6Q2WLn2hGCxUoaJQxNsebn
+
+XMRig config:
+~/.config/xmrig/config.json
+
+Systemd user service:
+~/.config/systemd/user/xmrig.service
+
+Check mining:
+- systemctl --user status xmrig
+- journalctl --user -u xmrig -f
+
+Control:
+- systemctl --user stop xmrig
+- systemctl --user start xmrig
+- systemctl --user restart xmrig
+
+Pool dashboard:
+- https://www.supportxmr.com/ (paste wallet address)
