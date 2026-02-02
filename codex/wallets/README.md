@@ -3,8 +3,14 @@
 This directory is the authoritative record of all wallets
 associated with Witching Hour projects.
 
-Rules:
+## Rules
+
 - No private keys stored here.
 - Addresses only.
 - Purpose must be documented.
 - If a wallet is unclear, mark it as UNKNOWN.
+
+## Index
+
+- `master-index.md` Canonical cross-chain index
+- `ethereum.md` Ethereum wallet details

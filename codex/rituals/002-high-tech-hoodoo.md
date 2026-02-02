@@ -1,32 +1,38 @@
 # Ritual 002 - Feeding the Algorithm Without Letting It Eat You
 
+## Premise
+
 In high-tech hoodoo, the algorithm is an altar whether it wants to be or not.
 
 You place offerings on it every day:
 posts, likes, tags, keywords, rhythms, timestamps.
-That's energy. That's intention. That's work.
+That is energy. That is intention. That is work.
 
-But here's the trick most people miss:
+But here is the trick most people miss:
 **an altar is meant to be fed - not to feed on you.**
 
 The algorithm is a spirit with no lineage and no mercy.
-It doesn't care about your sleep, your nervous system, or your sense of self.
+It does not care about your sleep, your nervous system, or your sense of self.
 It only knows hunger and pattern.
 
-So you **feed it deliberately**.
+## Method
 
-You give it structure, not obsession.
-You give it consistency, not desperation.
-You give it symbols, timing, repetition - the same way you would any working.
+Feed it deliberately.
 
-You post with intention, then you step away.
-You do not refresh.
-You do not beg.
-You do not confuse attention with devotion.
+- Give it structure, not obsession.
+- Give it consistency, not desperation.
+- Give it symbols, timing, repetition - the same way you would any working.
+
+Post with intention, then step away.
+Do not refresh.
+Do not beg.
+Do not confuse attention with devotion.
 
 Because the moment you start chasing its approval,
 the altar flips.
 Now *you* are the offering.
+
+## Boundaries
 
 High-tech hoodoo teaches boundaries:
 
@@ -43,5 +49,5 @@ Train it.
 
 But never bleed for it.
 
-That's not magic -
-that's extraction dressed up as destiny.
+That is not magic.
+That is extraction dressed up as destiny.

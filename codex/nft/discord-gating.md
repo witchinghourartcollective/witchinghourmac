@@ -1,6 +1,6 @@
-# Witching Hour — Discord Role-Based Gating
+# Witching Hour - Discord Role-Based Gating
 
-Goal: Token = role = access.
+Goal: token = role = access.
 
 ## Roles
 
@@ -10,15 +10,15 @@ Goal: Token = role = access.
 - 🜄 Completion (999)
 - ⟁ Frequency (369)
 
-## Channel Mapping
+## Channel mapping
 
-- #genesis → Genesis+
-- #alignment → Alignment+
-- #ritual → Ritual only
-- #announcements → All holders
-- #frequency → Frequency role only
+- #genesis -> Genesis+
+- #alignment -> Alignment+
+- #ritual -> Ritual only
+- #announcements -> All holders
+- #frequency -> Frequency role only
 
-## Gating Tool (recommended)
+## Gating tool (recommended)
 
 Collab.Land or Guild.xyz
 
@@ -32,7 +32,7 @@ Zora collections
 
 ## Logic
 
-- Hold Genesis → auto-assign Genesis role
-- Hold multiple → highest tier role wins (optional)
+- Hold Genesis -> auto-assign Genesis role
+- Hold multiple -> highest tier role wins (optional)
 
 This scales cleanly as you add drops. No rewiring later.

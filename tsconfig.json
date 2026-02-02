@@ -15,7 +15,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "plugins": [
       {
@@ -39,6 +39,11 @@
   ],
   "exclude": [
     "node_modules",
-    "src_BACKUP_1768822571"
+    "src_BACKUP_1768822571",
+    "hello-arc",
+    "scp-bytecode-deploy",
+    "evolving-cellular-automata",
+    "prana-map",
+    "mining-research"
   ]
 }

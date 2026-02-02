@@ -1,9 +1,7 @@
 # Master Wallet Index
 
-> Canonical index of all known wallets across chains.
-> Detailed mappings live in chain-specific files.
-
----
+Canonical index of all known wallets across chains.
+Detailed mappings live in chain-specific files.
 
 ## Ethereum
 
@@ -19,19 +17,16 @@
   - Type: Unknown
   - Role: Unknown
   - Status: Needs mapping
-  - Notes: Investigate tx history & contracts
-
----
+  - Notes: Investigate tx history and contracts
 
 ## Solana
-- Status: Not indexed yet
 
----
+- Status: Not indexed yet
 
 ## TON
+
 - Status: Not indexed yet
 
----
-
 ## EOS
+
 - Status: Not indexed yet

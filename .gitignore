@@ -46,3 +46,10 @@ app/
 !src/app/
 !src/app/**
 .env*.local
+
+# local-only artifacts and nested repos
+114
+NEXT_TELEMETRY_DISABLED=1
+hello-arc/
+prana-map/
+scp-bytecode-deploy/
