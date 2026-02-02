@@ -285,3 +285,8 @@ Control:
 
 Pool dashboard:
 - https://www.supportxmr.com/ (paste wallet address)
+
+XMRig source:
+- Clone (not committed): https://github.com/xmrig/xmrig
+- Local path: /home/fletchervaughn/code/witching-hour/xmrig
+- Commit: 753859ca
