@@ -49,6 +49,8 @@ app/
 .env*.local
 .venv/
 **/.venv/
+.codex/sessions/
+.codex/sessions/**
 
 # local-only source checkout
 xmrig/
