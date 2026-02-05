@@ -13,6 +13,7 @@ PlatformIO project for the Sunton ESP32-2432S024N board.
 1) Open in VS Code + PlatformIO.
 2) Update Wi-Fi credentials in `include/config.h`.
 3) Update LED and I2S pins in `include/config.h` to match your wiring.
+   - Default LED pin moved to `27` to avoid conflict with TFT `DC` on pin `2`.
 4) If the display is black, switch the driver in `include/config.h`:
    - `WHM_TFT_DRIVER_ILI9341` or `WHM_TFT_DRIVER_ST7789`
 5) Build + upload.

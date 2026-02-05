@@ -5,7 +5,7 @@
 #define WHM_WIFI_PASS "YOUR_WIFI_PASS"
 
 // Addressable LEDs (adjust to your hardware).
-#define WHM_LED_PIN 2
+#define WHM_LED_PIN 27
 #define WHM_LED_COUNT 30
 
 // TFT display driver selection (set one to 1).
