@@ -50,6 +50,11 @@ python server.py`}</code>
       <pre>
         <code>{`http://PI_IP:8088/`}</code>
       </pre>
+      <p>BLE scan (Pi only):</p>
+      <pre>
+        <code>{`pip install bleak
+curl http://PI_IP:8088/ble/scan`}</code>
+      </pre>
 
       <h2>BLE Commands</h2>
       <pre>
