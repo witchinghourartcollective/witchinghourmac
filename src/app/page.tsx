@@ -54,6 +54,7 @@ export default function Home() {
           <li><Link href="/access">Access</Link></li>
           <li><Link href="/calendar">Calendar</Link></li>
           <li><Link href="/links">Links</Link></li>
+          <li><Link href="/esp32">ESP32</Link></li>
           <li><Link href="/dashboard">WAX Dashboard</Link></li>
         </ul>
       </nav>

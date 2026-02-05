@@ -47,6 +47,8 @@ app/
 !src/app/
 !src/app/**
 .env*.local
+.venv/
+**/.venv/
 
 # local-only source checkout
 xmrig/
