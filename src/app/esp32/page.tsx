@@ -80,9 +80,14 @@ ANIM pulse`}</code>
       <h2>Why The Screen Is Black</h2>
       <p>
         The display is not initialized yet. We need the driver chip used by your
-        board (often ILI9341 or ST7789). If you can find a listing, silkscreen
-        text, or a photo of the back of the display, we can enable the TFT and
-        draw a UI.
+        board (often ILI9341 or ST7789). We added a driver toggle in
+        `include/config.h`. Flip between `WHM_TFT_DRIVER_ILI9341` and
+        `WHM_TFT_DRIVER_ST7789` until the screen lights up.
+      </p>
+      <p>
+        We draw a simple sigil placeholder right now. If you want the real WHM
+        sigil on the ESP32 screen, export a 240x240 monochrome PNG and I will
+        embed it as a bitmap.
       </p>
 
       <h2>Notes</h2>

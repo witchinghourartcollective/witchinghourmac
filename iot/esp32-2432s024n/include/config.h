@@ -8,6 +8,19 @@
 #define WHM_LED_PIN 2
 #define WHM_LED_COUNT 30
 
+// TFT display driver selection (set one to 1).
+#define WHM_TFT_DRIVER_ILI9341 1
+#define WHM_TFT_DRIVER_ST7789 0
+
+// TFT pins (common ESP32-2432S024N defaults; adjust if needed).
+#define WHM_TFT_MOSI 13
+#define WHM_TFT_MISO 12
+#define WHM_TFT_SCLK 14
+#define WHM_TFT_CS 15
+#define WHM_TFT_DC 2
+#define WHM_TFT_RST 4
+#define WHM_TFT_BL 21
+
 // I2S audio (adjust to your hardware).
 // Common defaults: BCLK=26, LRCK=25, DOUT=22
 #define WHM_I2S_BCLK 26

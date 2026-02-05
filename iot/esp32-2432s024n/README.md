@@ -13,7 +13,9 @@ PlatformIO project for the Sunton ESP32-2432S024N board.
 1) Open in VS Code + PlatformIO.
 2) Update Wi-Fi credentials in `include/config.h`.
 3) Update LED and I2S pins in `include/config.h` to match your wiring.
-3) Build + upload.
+4) If the display is black, switch the driver in `include/config.h`:
+   - `WHM_TFT_DRIVER_ILI9341` or `WHM_TFT_DRIVER_ST7789`
+5) Build + upload.
 
 ## HTTP API
 - `GET /status`
@@ -36,3 +38,7 @@ Status is notified on `WHM_BLE_STATUS_CHAR_UUID` as JSON.
 - `SCENE gallery`
 - `AUDIO Witching Hour Session 01`
 - `ANIM swirl`
+
+## Display
+We draw a simple sigil placeholder on boot. If you want the real WHM sigil,
+export a 240x240 monochrome PNG and I can embed it as a bitmap.

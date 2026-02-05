@@ -3,12 +3,14 @@
 #include <WiFi.h>
 #include <WebServer.h>
 #include <FastLED.h>
+#include <TFT_eSPI.h>
 #include <NimBLEDevice.h>
 #include "config.h"
 
 WebServer server(80);
 NimBLECharacteristic *statusChar = nullptr;
 CRGB leds[WHM_LED_COUNT];
+TFT_eSPI tft = TFT_eSPI();
 
 struct WhmState {
   bool lightsOn = false;
@@ -23,6 +25,28 @@ struct WhmState {
 
 uint32_t lastFrame = 0;
 uint16_t hueBase = 0;
+
+void drawSigilPlaceholder() {
+  tft.fillScreen(TFT_BLACK);
+  tft.setTextColor(TFT_YELLOW, TFT_BLACK);
+  tft.setTextDatum(MC_DATUM);
+  tft.setFreeFont(&FreeSerifBold24pt7b);
+  tft.drawString("WITCHING", tft.width() / 2, 56);
+  tft.drawString("HOUR", tft.width() / 2, 92);
+
+  int cx = tft.width() / 2;
+  int cy = tft.height() / 2 + 30;
+  int r = 72;
+  tft.drawCircle(cx, cy, r, TFT_DARKGREY);
+  tft.drawCircle(cx, cy, r - 6, TFT_DARKGREY);
+  tft.drawLine(cx - r, cy, cx + r, cy, TFT_DARKGREY);
+  tft.drawLine(cx, cy - r, cx, cy + r, TFT_DARKGREY);
+  tft.fillCircle(cx, cy, 4, TFT_YELLOW);
+
+  tft.setTextColor(TFT_DARKGREY, TFT_BLACK);
+  tft.setFreeFont(&FreeSerif9pt7b);
+  tft.drawString("SIGIL PLACEHOLDER", tft.width() / 2, tft.height() - 24);
+}
 
 void applyLight() {
   uint8_t level = state.lightsOn ? state.brightness : 0;
@@ -303,6 +327,12 @@ void setup() {
   FastLED.addLeds<NEOPIXEL, WHM_LED_PIN>(leds, WHM_LED_COUNT);
   FastLED.setBrightness(state.brightness);
   applyLight();
+
+  pinMode(WHM_TFT_BL, OUTPUT);
+  digitalWrite(WHM_TFT_BL, HIGH);
+  tft.init();
+  tft.setRotation(1);
+  drawSigilPlaceholder();
 
   i2s_config_t i2sConfig = {};
   i2sConfig.mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX);
