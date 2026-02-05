@@ -18,7 +18,11 @@ struct WhmState {
   uint8_t brightness = 120;
   String scene = "foyer";
   String nowPlaying = "";
+  String animation = "steady";
 } state;
+
+uint32_t lastFrame = 0;
+uint16_t hueBase = 0;
 
 void applyLight() {
   uint8_t level = state.lightsOn ? state.brightness : 0;
@@ -31,6 +35,33 @@ void applyLight() {
   }
   FastLED.setBrightness(level);
   FastLED.show();
+}
+
+void renderAnimation() {
+  if (!state.lightsOn) {
+    applyLight();
+    return;
+  }
+
+  if (state.animation == "pulse") {
+    uint8_t wave = sin8(hueBase);
+    FastLED.setBrightness(map(wave, 0, 255, 30, state.brightness));
+    fill_solid(leds, WHM_LED_COUNT, CRGB(state.r, state.g, state.b));
+  } else if (state.animation == "swirl") {
+    for (int i = 0; i < WHM_LED_COUNT; i++) {
+      uint8_t hue = (hueBase + (i * 12)) & 0xFF;
+      leds[i] = CHSV(hue, 200, state.brightness);
+    }
+  } else if (state.animation == "sparkle") {
+    fadeToBlackBy(leds, WHM_LED_COUNT, 30);
+    int pos = random(0, WHM_LED_COUNT);
+    leds[pos] = CRGB(state.r, state.g, state.b);
+  } else {
+    fill_solid(leds, WHM_LED_COUNT, CRGB(state.r, state.g, state.b));
+  }
+
+  FastLED.show();
+  hueBase += 3;
 }
 
 void playTone(uint16_t frequencyHz, uint16_t durationMs) {
@@ -54,13 +85,43 @@ void playTone(uint16_t frequencyHz, uint16_t durationMs) {
   }
 }
 
+void playSynthPad(uint16_t durationMs, float freqA, float freqB) {
+  const int sampleRate = 22050;
+  const int samples = (sampleRate * durationMs) / 1000;
+  const float stepA = 2.0f * PI * freqA / sampleRate;
+  const float stepB = 2.0f * PI * freqB / sampleRate;
+  const int chunk = 256;
+  int16_t buffer[chunk];
+  int remaining = samples;
+
+  while (remaining > 0) {
+    int count = remaining > chunk ? chunk : remaining;
+    for (int i = 0; i < count; i++) {
+      int index = samples - remaining + i;
+      float env = 1.0f;
+      if (index < sampleRate * 0.1f) {
+        env = index / (sampleRate * 0.1f);
+      } else if (index > samples - sampleRate * 0.2f) {
+        env = (samples - index) / (sampleRate * 0.2f);
+      }
+      float sample = (sinf(stepA * index) + 0.7f * sinf(stepB * index)) * 0.5f;
+      int16_t value = (int16_t)(sample * 22000 * env);
+      buffer[i] = value;
+    }
+    size_t bytesWritten = 0;
+    i2s_write(I2S_NUM_0, buffer, count * sizeof(int16_t), &bytesWritten, portMAX_DELAY);
+    remaining -= count;
+  }
+}
+
 String stateJson() {
   String json = "{";
   json += "\"lightsOn\":" + String(state.lightsOn ? "true" : "false") + ",";
   json += "\"brightness\":" + String(state.brightness) + ",";
   json += "\"rgb\":[" + String(state.r) + "," + String(state.g) + "," + String(state.b) + "],";
   json += "\"scene\":\"" + state.scene + "\",";
-  json += "\"nowPlaying\":\"" + state.nowPlaying + "\"";
+  json += "\"nowPlaying\":\"" + state.nowPlaying + "\",";
+  json += "\"animation\":\"" + state.animation + "\"";
   json += "}";
   return json;
 }
@@ -92,6 +153,15 @@ void handleScene() {
   if (server.hasArg("name")) {
     state.scene = server.arg("name");
   }
+  if (state.scene == "gallery") {
+    state.animation = "swirl";
+  } else if (state.scene == "vault") {
+    state.animation = "sparkle";
+  } else if (state.scene == "studio") {
+    state.animation = "pulse";
+  } else {
+    state.animation = "steady";
+  }
   if (statusChar) {
     statusChar->setValue(stateJson().c_str());
     statusChar->notify();
@@ -103,12 +173,37 @@ void handleAudio() {
   if (server.hasArg("title")) {
     state.nowPlaying = server.arg("title");
   }
-  playTone(440, 120);
+  playSynthPad(1200, 196.0f, 246.9f);
   if (statusChar) {
     statusChar->setValue(stateJson().c_str());
     statusChar->notify();
   }
   server.send(200, "application/json", stateJson());
+}
+
+void handleAudioStream() {
+  int length = server.hasHeader("Content-Length") ? server.header("Content-Length").toInt() : 0;
+  if (length <= 0) {
+    server.send(400, "application/json", "{\"error\":\"missing_audio\"}");
+    return;
+  }
+
+  WiFiClient client = server.client();
+  const int chunkSize = 512;
+  uint8_t buffer[chunkSize];
+  int remaining = length;
+  while (remaining > 0) {
+    int toRead = remaining > chunkSize ? chunkSize : remaining;
+    int readBytes = client.readBytes(reinterpret_cast<char *>(buffer), toRead);
+    if (readBytes <= 0) {
+      break;
+    }
+    size_t bytesWritten = 0;
+    i2s_write(I2S_NUM_0, buffer, readBytes, &bytesWritten, portMAX_DELAY);
+    remaining -= readBytes;
+  }
+
+  server.send(200, "application/json", "{\"status\":\"played\"}");
 }
 
 class CommandCallbacks : public NimBLECharacteristicCallbacks {
@@ -130,10 +225,22 @@ class CommandCallbacks : public NimBLECharacteristicCallbacks {
     } else if (payload.startsWith("SCENE")) {
       // Format: SCENE name
       state.scene = payload.substring(6);
+      if (state.scene == "gallery") {
+        state.animation = "swirl";
+      } else if (state.scene == "vault") {
+        state.animation = "sparkle";
+      } else if (state.scene == "studio") {
+        state.animation = "pulse";
+      } else {
+        state.animation = "steady";
+      }
     } else if (payload.startsWith("AUDIO")) {
       // Format: AUDIO title
       state.nowPlaying = payload.substring(6);
-      playTone(523, 120);
+      playSynthPad(1200, 220.0f, 277.2f);
+    } else if (payload.startsWith("ANIM")) {
+      // Format: ANIM name
+      state.animation = payload.substring(5);
     }
 
     if (statusChar) {
@@ -185,6 +292,7 @@ void setupServer() {
   server.on("/light", HTTP_POST, handleLight);
   server.on("/scene", HTTP_POST, handleScene);
   server.on("/audio", HTTP_POST, handleAudio);
+  server.on("/audio-stream", HTTP_POST, handleAudioStream);
   server.begin();
 }
 
@@ -227,6 +335,11 @@ void setup() {
 
 void loop() {
   server.handleClient();
+  uint32_t now = millis();
+  if (now - lastFrame > 40) {
+    lastFrame = now;
+    renderAnimation();
+  }
 
   if (Serial.available()) {
     String line = Serial.readStringUntil('\n');
@@ -242,9 +355,20 @@ void loop() {
       applyLight();
     } else if (line.startsWith("SCENE")) {
       state.scene = line.substring(6);
+      if (state.scene == "gallery") {
+        state.animation = "swirl";
+      } else if (state.scene == "vault") {
+        state.animation = "sparkle";
+      } else if (state.scene == "studio") {
+        state.animation = "pulse";
+      } else {
+        state.animation = "steady";
+      }
     } else if (line.startsWith("AUDIO")) {
       state.nowPlaying = line.substring(6);
-      playTone(659, 120);
+      playSynthPad(1200, 174.6f, 233.1f);
+    } else if (line.startsWith("ANIM")) {
+      state.animation = line.substring(5);
     }
   }
 }

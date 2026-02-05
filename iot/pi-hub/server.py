@@ -7,6 +7,12 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
 DEVICES_PATH = BASE_DIR / "devices.json"
+UI_PATH = BASE_DIR / "ui.html"
+
+try:
+  from bleak import BleakScanner  # type: ignore
+except Exception:
+  BleakScanner = None
 
 
 def load_devices():
@@ -36,12 +42,39 @@ class HubHandler(BaseHTTPRequestHandler):
     self.wfile.write(body)
 
   def do_GET(self):
+    if self.path == "/" and UI_PATH.exists():
+      html = UI_PATH.read_text().encode("utf-8")
+      self.send_response(200)
+      self.send_header("Content-Type", "text/html")
+      self.send_header("Content-Length", str(len(html)))
+      self.end_headers()
+      self.wfile.write(html)
+      return
+
     if self.path.startswith("/devices"):
       devices = load_devices()
       payload = {
         "devices": list(devices.values())
       }
       self._send(200, json.dumps(payload))
+      return
+
+    if self.path.startswith("/ble/scan"):
+      if BleakScanner is None:
+        self._send(500, json.dumps({ "error": "bleak_not_installed" }))
+        return
+      devices = []
+      try:
+        found = BleakScanner.discover(timeout=5.0)
+        for entry in found:
+          devices.append({
+            "name": entry.name,
+            "address": entry.address,
+            "rssi": entry.rssi
+          })
+        self._send(200, json.dumps({ "devices": devices }))
+      except Exception as exc:
+        self._send(500, json.dumps({ "error": "ble_scan_failed", "detail": str(exc) }))
       return
 
     self._send(404, json.dumps({"error": "not_found"}))

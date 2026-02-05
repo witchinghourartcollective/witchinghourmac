@@ -7,7 +7,7 @@ PlatformIO project for the Sunton ESP32-2432S024N board.
 - BLE GATT commands for low-latency control.
 - Serial commands over USB for direct control.
 - Addressable LED output via FastLED.
-- I2S audio output (simple tone confirmation).
+- I2S audio output (synth pad + optional audio stream).
 
 ## Setup
 1) Open in VS Code + PlatformIO.
@@ -20,12 +20,14 @@ PlatformIO project for the Sunton ESP32-2432S024N board.
 - `POST /light?on=1&brightness=120&r=120&g=40&b=10`
 - `POST /scene?name=gallery`
 - `POST /audio?title=Witching%20Hour%20Session%2001`
+- `POST /audio-stream` (raw 16-bit mono PCM, 22.05kHz)
 
 ## BLE Commands
 Write to characteristic `WHM_BLE_COMMAND_CHAR_UUID`:
 - `LIGHT 1 120 120 40 10`
 - `SCENE gallery`
 - `AUDIO Witching Hour Session 01`
+- `ANIM pulse`
 
 Status is notified on `WHM_BLE_STATUS_CHAR_UUID` as JSON.
 
@@ -33,3 +35,4 @@ Status is notified on `WHM_BLE_STATUS_CHAR_UUID` as JSON.
 - `LIGHT 1 120 120 40 10`
 - `SCENE gallery`
 - `AUDIO Witching Hour Session 01`
+- `ANIM swirl`
