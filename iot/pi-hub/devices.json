@@ -1,0 +1,14 @@
+{
+  "devices": [
+    {
+      "id": "whm-foyer",
+      "name": "Foyer ESP32",
+      "ip": "192.168.1.150"
+    },
+    {
+      "id": "whm-gallery",
+      "name": "Gallery ESP32",
+      "ip": "192.168.1.151"
+    }
+  ]
+}
