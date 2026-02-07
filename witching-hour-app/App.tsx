@@ -130,8 +130,10 @@ export default function App() {
   const [playing, setPlaying] = useState(false);
   const [sound, setSound] = useState<Audio.Sound | null>(null);
   const [transitionKey, setTransitionKey] = useState(0);
+  const [loggingOut, setLoggingOut] = useState(false);
   const travel = useRef(new Animated.Value(0)).current;
   const shimmer = useRef(new Animated.Value(0)).current;
+  const logoutFade = useRef(new Animated.Value(0)).current;
 
   const currentRoom = useMemo(
     () => ROOMS.find((room) => room.id === roomId) ?? ROOMS[0],
@@ -166,6 +168,22 @@ export default function App() {
     }).start();
     setTransitionKey((prev) => prev + 1);
   }, [roomId, travel]);
+
+  useEffect(() => {
+    Animated.timing(logoutFade, {
+      toValue: loggingOut ? 1 : 0,
+      duration: 600,
+      useNativeDriver: true
+    }).start();
+  }, [loggingOut, logoutFade]);
+
+  const handleLogOut = () => {
+    setLoggingOut(true);
+  };
+
+  const handleReenter = () => {
+    setLoggingOut(false);
+  };
 
   const handleTogglePlayback = async () => {
     if (!track.previewUrl) {
@@ -279,6 +297,9 @@ export default function App() {
                 <Text style={styles.roomHint}>
                   Tap other rooms to keep walking.
                 </Text>
+                <Pressable style={styles.exitButton} onPress={handleLogOut}>
+                  <Text style={styles.exitButtonText}>Exit the House</Text>
+                </Pressable>
               </View>
             </View>
           </Animated.View>
@@ -368,6 +389,28 @@ export default function App() {
           </Text>
         </View>
       </ScrollView>
+      <Animated.View
+        pointerEvents={loggingOut ? "auto" : "none"}
+        style={[
+          styles.logoutOverlay,
+          {
+            opacity: logoutFade
+          }
+        ]}
+      >
+        <View style={styles.logoutPanel}>
+          <Text style={styles.logoutTitle}>Witching Hour Terminal</Text>
+          <View style={styles.logoutLog}>
+            <Text style={styles.logoutLine}>$ exit --house</Text>
+            <Text style={styles.logoutLine}>Disconnecting rooms...</Text>
+            <Text style={styles.logoutLine}>Saving ambient state...</Text>
+            <Text style={styles.logoutLine}>Door sealed. You remain.</Text>
+          </View>
+          <Pressable style={styles.reenterButton} onPress={handleReenter}>
+            <Text style={styles.reenterButtonText}>Return Inside</Text>
+          </Pressable>
+        </View>
+      </Animated.View>
     </SafeAreaView>
   );
 }
@@ -517,6 +560,21 @@ const styles = StyleSheet.create({
     color: THEME.mist,
     fontSize: 12
   },
+  exitButton: {
+    marginTop: 10,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 999,
+    borderWidth: 1,
+    borderColor: "#2b2b35",
+    backgroundColor: "#0d0d14",
+    alignSelf: "flex-start"
+  },
+  exitButtonText: {
+    color: THEME.ash,
+    fontSize: 12,
+    letterSpacing: 1
+  },
   section: {
     gap: 12
   },
@@ -657,5 +715,51 @@ const styles = StyleSheet.create({
     color: THEME.mist,
     fontSize: 12,
     lineHeight: 18
+  },
+  logoutOverlay: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    backgroundColor: "rgba(3, 3, 6, 0.94)",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 24
+  },
+  logoutPanel: {
+    width: "100%",
+    maxWidth: 520,
+    padding: 24,
+    borderRadius: 18,
+    borderWidth: 1,
+    borderColor: "#2b2b3a",
+    backgroundColor: "#0a0a12"
+  },
+  logoutTitle: {
+    color: THEME.glow,
+    fontSize: 16,
+    textTransform: "uppercase",
+    letterSpacing: 2,
+    marginBottom: 16
+  },
+  logoutLog: {
+    gap: 8,
+    marginBottom: 18
+  },
+  logoutLine: {
+    color: THEME.mist,
+    fontSize: 12,
+    letterSpacing: 1
+  },
+  reenterButton: {
+    paddingVertical: 10,
+    borderRadius: 999,
+    backgroundColor: THEME.ember,
+    alignItems: "center"
+  },
+  reenterButtonText: {
+    color: "#130606",
+    fontWeight: "600"
   }
 });

@@ -12,15 +12,17 @@
     "lint": "echo \"No lint configured yet\""
   },
   "dependencies": {
-    "expo": "^52.0.0",
-    "expo-av": "^14.0.0",
-    "expo-status-bar": "^2.0.0",
-    "react": "18.2.0",
-    "react-native": "0.76.0"
+    "expo": "^54.0.33",
+    "expo-av": "~16.0.8",
+    "expo-status-bar": "~3.0.9",
+    "npx": "^10.2.2",
+    "react": "19.1.0",
+    "react-native": "0.81.5",
+    "start": "^5.1.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",
-    "@types/react-native": "^0.76.0",
+    "babel-preset-expo": "^54.0.10",
     "typescript": "^5.3.3"
   }
 }
