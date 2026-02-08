@@ -279,9 +279,11 @@ export default function App() {
               }
             ]}
           >
+            <View style={styles.sceneBackdrop} />
             <View style={styles.sceneWallLeft} />
             <View style={styles.sceneWallRight} />
             <View style={styles.sceneWallBack} />
+            <View style={styles.sceneWindow} />
             <View style={styles.sceneFloor} />
             <Animated.View
               style={[
@@ -485,14 +487,18 @@ const styles = StyleSheet.create({
     borderRadius: 22,
     overflow: "hidden"
   },
+  sceneBackdrop: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "#14141f"
+  },
   sceneWallLeft: {
     position: "absolute",
     left: 0,
     top: 0,
     bottom: 0,
     width: "32%",
-    backgroundColor: THEME.green,
-    opacity: 0.7
+    backgroundColor: "#1d5c43",
+    opacity: 0.9
   },
   sceneWallRight: {
     position: "absolute",
@@ -500,8 +506,8 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     width: "32%",
-    backgroundColor: THEME.purple,
-    opacity: 0.6
+    backgroundColor: "#4b1b6f",
+    opacity: 0.85
   },
   sceneWallBack: {
     position: "absolute",
@@ -509,10 +515,21 @@ const styles = StyleSheet.create({
     right: "20%",
     top: "16%",
     bottom: "16%",
-    backgroundColor: THEME.maroon,
+    backgroundColor: "#5a1a22",
     borderWidth: 1,
-    borderColor: "#2c2c3a",
-    opacity: 0.8
+    borderColor: "#3a3a4a",
+    opacity: 0.9
+  },
+  sceneWindow: {
+    position: "absolute",
+    left: "38%",
+    right: "38%",
+    top: "18%",
+    height: "24%",
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#d1b15a",
+    backgroundColor: "rgba(209, 177, 90, 0.18)"
   },
   sceneFloor: {
     position: "absolute",
@@ -520,8 +537,8 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: -40,
     height: "45%",
-    backgroundColor: "#07070b",
-    opacity: 0.9,
+    backgroundColor: "#0a0a10",
+    opacity: 0.95,
     transform: [{ skewX: "-8deg" }]
   },
   sceneGlow: {
@@ -531,7 +548,7 @@ const styles = StyleSheet.create({
     top: "10%",
     bottom: "10%",
     backgroundColor: THEME.gold,
-    opacity: 0.08,
+    opacity: 0.18,
     borderRadius: 999
   },
   sceneContent: {
