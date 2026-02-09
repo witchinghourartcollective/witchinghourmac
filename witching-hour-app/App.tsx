@@ -498,7 +498,8 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: "32%",
     backgroundColor: "#1d5c43",
-    opacity: 0.9
+    opacity: 0.9,
+    zIndex: 1
   },
   sceneWallRight: {
     position: "absolute",
@@ -507,7 +508,8 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: "32%",
     backgroundColor: "#4b1b6f",
-    opacity: 0.85
+    opacity: 0.85,
+    zIndex: 1
   },
   sceneWallBack: {
     position: "absolute",
@@ -518,7 +520,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#5a1a22",
     borderWidth: 1,
     borderColor: "#3a3a4a",
-    opacity: 0.9
+    opacity: 0.9,
+    zIndex: 2
   },
   sceneWindow: {
     position: "absolute",
@@ -529,7 +532,8 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 1,
     borderColor: "#d1b15a",
-    backgroundColor: "rgba(209, 177, 90, 0.18)"
+    backgroundColor: "rgba(209, 177, 90, 0.18)",
+    zIndex: 3
   },
   sceneFloor: {
     position: "absolute",
@@ -539,7 +543,8 @@ const styles = StyleSheet.create({
     height: "45%",
     backgroundColor: "#0a0a10",
     opacity: 0.95,
-    transform: [{ skewX: "-8deg" }]
+    transform: [{ skewX: "-8deg" }],
+    zIndex: 0
   },
   sceneGlow: {
     position: "absolute",
@@ -549,12 +554,14 @@ const styles = StyleSheet.create({
     bottom: "10%",
     backgroundColor: THEME.gold,
     opacity: 0.18,
-    borderRadius: 999
+    borderRadius: 999,
+    zIndex: 4
   },
   sceneContent: {
     flex: 1,
     padding: 20,
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
+    zIndex: 5
   },
   roomTitle: {
     fontSize: 22,

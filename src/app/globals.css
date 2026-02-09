@@ -3,12 +3,23 @@
 @tailwind utilities;
 
 :root {
-  --bg-main: #0e0e12;        /* near-black */
-  --bg-panel: #15151d;      /* dark grey */
-  --ink-main: #c7ffd8;      /* pale green */
-  --ink-accent: #9b6cff;    /* purple */
-  --ink-warm: #7a1f2b;      /* maroon */
-  --ink-spark: #ffd86b;     /* yellow */
+  --ink: #07060b;
+  --void: #0d0b14;
+  --smoke: #151224;
+  --violet: #7a4aa8;
+  --magenta: #b44fff;
+  --ember: #c04a3a;
+  --green-glow: #7cffc6;
+  --gold-glow: #e6c97a;
+  --ash: #cfc7d8;
+  --mist: #9a92a8;
+
+  --bg-main: var(--ink);
+  --bg-panel: var(--smoke);
+  --ink-main: var(--ash);
+  --ink-accent: var(--magenta);
+  --ink-warm: var(--ember);
+  --ink-spark: var(--gold-glow);
 }
 
 html, body {
@@ -19,6 +30,15 @@ html, body {
 body {
   position: relative;
   text-align: center;
+  background-image:
+    radial-gradient(140% 120% at 80% 10%, rgba(180, 79, 255, 0.12), transparent 55%),
+    radial-gradient(120% 140% at 20% 90%, rgba(124, 255, 198, 0.1), transparent 60%),
+    linear-gradient(180deg, var(--void), var(--ink)),
+    url("/brand/sigils/sigil-background.svg");
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+  background-size: cover, cover, cover, 400px 400px;
+  background-attachment: fixed, fixed, fixed, fixed;
+  background-position: center;
 }
 
 body::before {
@@ -32,6 +52,24 @@ body::before {
   pointer-events: none;
   z-index: 0;
   filter: drop-shadow(0 0 6px rgba(220, 220, 220, 0.18));
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.05) 0px,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px,
+      transparent 20px
+    );
+  opacity: 0.05;
+  mix-blend-mode: screen;
+  z-index: 0;
 }
 
 main {
@@ -248,16 +286,32 @@ main {
   75% { transform: translate(0.4px, 0.4px); }
   100% { transform: translate(0, 0); }
 }
-body {
-  background-image: url("/brand/sigils/sigil-background.svg");
-  background-repeat: repeat;
-  background-size: 400px 400px;
-  background-attachment: fixed;
+
+main section {
+  position: relative;
+  padding: 2.5rem 2rem;
+  border-radius: 22px;
+  background:
+    radial-gradient(120% 140% at 80% 10%, rgba(180, 79, 255, 0.18), transparent 60%),
+    radial-gradient(120% 140% at 20% 90%, rgba(124, 255, 198, 0.12), transparent 55%),
+    linear-gradient(180deg, #0e0c18, #07060b);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 40px 80px rgba(0, 0, 0, 0.65),
+    inset 0 0 40px rgba(180, 79, 255, 0.08);
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
 }
 
-body {
-  background-image: url("/brand/sigils/sigil-background.svg");
-  background-repeat: repeat;
-  background-size: 400px 400px;
-  background-attachment: fixed;
+@media (hover: hover) {
+  main section:hover {
+    transform:
+      perspective(1200px)
+      translateY(-6px)
+      rotateX(2deg)
+      rotateY(-2deg);
+    box-shadow:
+      0 60px 120px rgba(0, 0, 0, 0.75),
+      inset 0 0 60px rgba(180, 79, 255, 0.14);
+  }
 }
