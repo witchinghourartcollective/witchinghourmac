@@ -2,7 +2,11 @@ const path = require("node:path");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true
+  reactStrictMode: true,
+  output: "export",
+  images: {
+    unoptimized: true
+  }
 };
 
 module.exports = nextConfig;
