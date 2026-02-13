@@ -6,10 +6,10 @@ export async function POST(request: NextRequest) {
     const { email, password } = body;
 
     // Simple test credentials (replace with database lookup later)
-    const testEmail = 'test@witchinghour.com';
-    const testPassword = 'password123';
+    const testEmail = process.env.TEST_LOGIN_EMAIL;
+    const testPassword = process.env.TEST_LOGIN_PASSWORD;
 
-    if (email === testEmail && password === testPassword) {
+    if (testEmail && testPassword && email === testEmail && password === testPassword) {
       // Generate a simple token (replace with JWT later)
       const token = Buffer.from(`${email}:${Date.now()}`).toString('base64');
 
