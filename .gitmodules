@@ -1,0 +1,3 @@
+[submodule "witching-hour-live"]
+	path = witching-hour-live
+	url = https://github.com/witchinghourartcollective/witching-hour-live.git
