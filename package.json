@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "NEXT_TELEMETRY_DISABLED=1 next dev",
+    "dev:tail": "NEXT_TELEMETRY_DISABLED=1 next dev -H 0.0.0.0 -p 3000",
     "build": "NEXT_TELEMETRY_DISABLED=1 next build",
     "start": "NEXT_TELEMETRY_DISABLED=1 next start",
     "lint": "NEXT_TELEMETRY_DISABLED=1 next lint --dir src",
