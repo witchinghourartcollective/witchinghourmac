@@ -63,5 +63,4 @@ prana-map/
 scp-bytecode-deploy/
 withing-hour-live/
 
-# Local nested repo
-witching-hour-live/
+## NOTE: witching-hour-live is tracked as a git submodule (do not ignore it here).
