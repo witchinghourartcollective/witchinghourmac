@@ -92,7 +92,7 @@ ANIM pulse`}</code>
 
       <h2>Notes</h2>
       <p>
-        Hardware reference from you: "sparkle iot xh 32s wifi bt n4xx".
+        Hardware reference from you: &quot;sparkle iot xh 32s wifi bt n4xx&quot;.
         We are assuming the ESP32-2432S024N board for now.
       </p>
     </main>

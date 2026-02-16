@@ -213,7 +213,7 @@ export default function PressPage() {
         <h2 className="text-xl font-semibold text-center">Notes</h2>
         <ul className="space-y-2">
           <li>If there are checkbox categories, pick all that apply.</li>
-          <li>If a form asks "What are you applying for?" tailor it to your goal.</li>
+          <li>If a form asks &quot;What are you applying for?&quot; tailor it to your goal.</li>
         </ul>
       </section>
     </main>

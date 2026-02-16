@@ -2,10 +2,15 @@
 
 # Witching Hour
 
-Witching Hour is a Next.js App Router site for the Witching Hour music + art collective.
-This repo also includes a few standalone experiments and research folders.
+Witching Hour is the website for the Witching Hour Music + Art Collective: a living signal of releases, studio sessions, visual systems, and onchain access.
 
-## Quick start
+The site is intentionally minimal, fast, and atmospheric. It exists to promote the work (music, art, and collaborations) and to act as the public surface for the NFT layer and access utilities.
+
+## Live
+
+- Production: `https://witching-hour.pages.dev`
+
+## Local Development
 
 ```bash
 npm install
@@ -14,20 +19,46 @@ npm run dev
 
 Open `http://localhost:3000`.
 
+### Tailscale (LAN/VPN Access)
+
+Bind to all interfaces and access it from another device:
+
+```bash
+npm run dev:tail
+```
+
+Then open `http://<your-tailscale-hostname-or-ip>:3000`.
+
+## Deploy
+
+This repo can be deployed as a static export to Cloudflare Pages (the `out/` folder).
+
+```bash
+npm run build
+npx wrangler pages deploy out --project-name witching-hour
+```
+
 ## Scripts
 
 ```bash
 npm run dev
+npm run dev:tail
 npm run lint
 npm run build
 npm run start
 npm run supermemory -- "Remember my favorite synths."
+npm run deploy
 ```
 
 ### Supermemory script
 
 - Set `SUPERMEMORY_API_KEY` in `.env.local` before running.
 - Pass a custom prompt after `--` to override the default.
+
+## What’s Here
+
+- Website pages: Ritual, Sigils, About, NFT, Mint, Litepaper, Press, Links, Calendar.
+- Studio and utilities live alongside the public site and evolve over time.
 
 ## Project structure
 
@@ -45,7 +76,7 @@ npm run supermemory -- "Remember my favorite synths."
 - Global layout + metadata: `src/app/layout.tsx`
 - Global styles: `src/app/globals.css`
 
-## Configuration
+## Configuration / Guardrails
 
 - Keep secrets in `.env.local` (not committed).
 - The Base app id meta tag lives in `src/app/layout.tsx`.

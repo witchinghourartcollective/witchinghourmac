@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "NEXT_TELEMETRY_DISABLED=1 next dev",
     "dev:tail": "NEXT_TELEMETRY_DISABLED=1 next dev -H 0.0.0.0 -p 3000",
-    "build": "NEXT_TELEMETRY_DISABLED=1 next build",
+    "build": "NEXT_TELEMETRY_DISABLED=1 next build --webpack",
     "start": "NEXT_TELEMETRY_DISABLED=1 next start",
-    "lint": "NEXT_TELEMETRY_DISABLED=1 next lint --dir src",
+    "lint": "NEXT_TELEMETRY_DISABLED=1 eslint --ext .js,.jsx,.ts,.tsx src",
     "supermemory": "tsx tools/supermemory.ts",
     "deploy": "NODE_OPTIONS=--dns-result-order=ipv4first vercel deploy --prod --force"
   },
