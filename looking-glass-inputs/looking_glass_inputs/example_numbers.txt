@@ -1,0 +1,4 @@
+# line 1: radionuc numbers
+12,45,87,132,199,233,377,610
+# line 2: scalar keys
+3,5,8,13,21,34

@@ -1,0 +1,6 @@
+numpy
+matplotlib
+watchdog
+flask
+web3
+python-dotenv
