@@ -1,6 +1,5 @@
 import "./globals.css";
 import Link from "next/link";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default function RootLayout({
   children,
@@ -27,7 +26,6 @@ export default function RootLayout({
             <Link href="/dashboard">WAX Dashboard</Link>
           </nav>
         </footer>
-        <SpeedInsights />
       </body>
     </html>
   );

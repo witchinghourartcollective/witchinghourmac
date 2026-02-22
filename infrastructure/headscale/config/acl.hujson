@@ -1,0 +1,10 @@
+{
+  // Start permissive while bootstrapping. Tighten this after enrollment.
+  "acls": [
+    {
+      "action": "accept",
+      "src": ["*"],
+      "dst": ["*:*"]
+    }
+  ]
+}

@@ -31,11 +31,17 @@ Then open `http://<your-tailscale-hostname-or-ip>:3000`.
 
 ## Deploy
 
-This repo can be deployed as a static export to Cloudflare Pages (the `out/` folder).
+This repo deploys to Cloudflare Pages from the static export (`out/` folder). No Vercel account is required.
 
 ```bash
 npm run build
 npx wrangler pages deploy out --project-name witching-hour
+```
+
+Or use:
+
+```bash
+npm run deploy
 ```
 
 ## Scripts
@@ -69,6 +75,7 @@ npm run deploy
 - `hello-arc/` Standalone Circle SCP/Wallets example.
 - `scp-bytecode-deploy/` Standalone Circle SCP/Wallets example.
 - `prana-map/`, `mining-research/`, `codex/` Additional research and documentation.
+- `infrastructure/headscale/` Self-hosted Tailscale-compatible coordination server setup (Headscale + Cloudflare Tunnel).
 
 ## Editing
 
