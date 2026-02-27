@@ -3,6 +3,7 @@ const path = require("node:path");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  poweredByHeader: false,
   experimental: {
     // Build worker can hang in constrained/sandboxed environments; disable for reliability.
     webpackBuildWorker: false
