@@ -3,9 +3,20 @@
 #include <WiFi.h>
 #include <WebServer.h>
 #include <FastLED.h>
+#include <SPIFFS.h>
 #include <TFT_eSPI.h>
 #include <NimBLEDevice.h>
 #include "config.h"
+
+#ifdef MY_PROJECT_VERSION
+// Include common file for the project.
+#include "my_common.h"
+#endif
+
+#if MY_PROJECT_VERSION < 10
+// This include is ignored with the current MY_PROJECT_VERSION value.
+#include "my_old.h"
+#endif
 
 WebServer server(80);
 NimBLECharacteristic *statusChar = nullptr;

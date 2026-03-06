@@ -1,0 +1,12 @@
+{
+  "labels": {
+    "BE:67:00:86:EB:15": "bed",
+    "2F:BF:7F:2F:19:92": "circle_light",
+    "3A:82:DB:E2:1E:A9": "circle_light",
+    "1A:52:4B:20:B9:F1": "string_lights",
+    "52:0B:AB:EE:8F:14": "speakers",
+    "56:DB:06:4F:76:4E": "led_strip",
+    "01:14:7D:DD:0E:CA": "mouse",
+    "30:E7:6E:64:E3:77": "keyboard"
+  }
+}

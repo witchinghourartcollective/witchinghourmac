@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import asyncio
 import json
 import urllib.parse
 import urllib.request
@@ -8,16 +9,36 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent
 DEVICES_PATH = BASE_DIR / "devices.json"
 UI_PATH = BASE_DIR / "ui.html"
+BLE_LABELS_PATH = BASE_DIR / "ble_labels.json"
+BLE_NAME_LABELS_PATH = BASE_DIR / "ble_name_labels.json"
 
 try:
   from bleak import BleakScanner  # type: ignore
+  from bleak import BleakClient  # type: ignore
 except Exception:
   BleakScanner = None
+  BleakClient = None
 
 
 def load_devices():
   data = json.loads(DEVICES_PATH.read_text())
   return {device["id"]: device for device in data.get("devices", [])}
+
+
+def load_ble_labels():
+  if not BLE_LABELS_PATH.exists():
+    return {}
+  data = json.loads(BLE_LABELS_PATH.read_text())
+  labels = data.get("labels", {})
+  return {address.upper(): label for address, label in labels.items()}
+
+
+def load_ble_name_labels():
+  if not BLE_NAME_LABELS_PATH.exists():
+    return {}
+  data = json.loads(BLE_NAME_LABELS_PATH.read_text())
+  labels = data.get("labels", {})
+  return {name.upper(): label for name, label in labels.items()}
 
 
 def proxy_request(device, path, params=None):
@@ -64,13 +85,21 @@ class HubHandler(BaseHTTPRequestHandler):
         self._send(500, json.dumps({ "error": "bleak_not_installed" }))
         return
       devices = []
+      labels = load_ble_labels()
+      name_labels = load_ble_name_labels()
       try:
-        found = BleakScanner.discover(timeout=5.0)
-        for entry in found:
+        found = asyncio.run(BleakScanner.discover(timeout=5.0, return_adv=True))
+        for _, (entry, adv_data) in found.items():
+          address = entry.address.upper()
+          device_name = entry.name or ""
+          label = labels.get(address)
+          if label is None and device_name:
+            label = name_labels.get(device_name.upper())
           devices.append({
             "name": entry.name,
-            "address": entry.address,
-            "rssi": entry.rssi
+            "address": address,
+            "rssi": adv_data.rssi,
+            "label": label
           })
         self._send(200, json.dumps({ "devices": devices }))
       except Exception as exc:
@@ -82,6 +111,40 @@ class HubHandler(BaseHTTPRequestHandler):
   def do_POST(self):
     parsed = urllib.parse.urlparse(self.path)
     params = dict(urllib.parse.parse_qsl(parsed.query))
+
+    if parsed.path == "/ble/test":
+      if BleakClient is None:
+        self._send(500, json.dumps({ "error": "bleak_not_installed" }))
+        return
+
+      address = params.get("address", "").strip()
+      if not address:
+        self._send(400, json.dumps({ "error": "missing_address" }))
+        return
+
+      async def _test_connection():
+        client = BleakClient(address, timeout=6.0)
+        try:
+          await client.connect()
+          return client.is_connected
+        finally:
+          if client.is_connected:
+            await client.disconnect()
+
+      try:
+        connected = asyncio.run(_test_connection())
+        self._send(200, json.dumps({
+          "ok": bool(connected),
+          "address": address
+        }))
+      except Exception as exc:
+        self._send(500, json.dumps({
+          "error": "ble_test_failed",
+          "address": address,
+          "detail": str(exc)
+        }))
+      return
+
     devices = load_devices()
     device_id = params.pop("device", None)
 
