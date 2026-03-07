@@ -1,8 +1,8 @@
 #pragma once
 
 // Update these for your network.
-#define WHM_WIFI_SSID "YOUR_WIFI_SSID"
-#define WHM_WIFI_PASS "YOUR_WIFI_PASS"
+#define WHM_WIFI_SSID "ATTWjHUiDK"
+#define WHM_WIFI_PASS "tnmk+auwtz2n"
 
 // Addressable LEDs (adjust to your hardware).
 #define WHM_LED_PIN 27
