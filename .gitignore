@@ -62,5 +62,8 @@ hello-arc/
 prana-map/
 scp-bytecode-deploy/
 withing-hour-live/
+iot/esp32-2432s024n/.pio-core/
+iot/esp32-2432s024n/.pio/
+iot/pi-hub/__pycache__/
 
 ## NOTE: witching-hour-live is tracked as a git submodule (do not ignore it here).

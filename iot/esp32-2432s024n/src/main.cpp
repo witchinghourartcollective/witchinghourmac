@@ -323,6 +323,7 @@ void setupWiFi() {
 }
 
 void setupServer() {
+  server.on("/", HTTP_GET, handleStatus);
   server.on("/status", HTTP_GET, handleStatus);
   server.on("/light", HTTP_POST, handleLight);
   server.on("/scene", HTTP_POST, handleScene);
