@@ -1,8 +1,8 @@
 {
   "m.homeserver": {
-    "base_url": "https://islands-planned-cancellation-cdna.trycloudflare.com"
+    "base_url": "https://screen-seq-tex-castle.trycloudflare.com"
   },
   "org.matrix.msc3575.proxy": {
-    "url": "https://islands-planned-cancellation-cdna.trycloudflare.com"
+    "url": "https://screen-seq-tex-castle.trycloudflare.com"
   }
 }
