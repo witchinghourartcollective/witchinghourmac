@@ -25,7 +25,8 @@ BATCH_SIZE = int(os.getenv("BATCH_SIZE", "50"))
 
 ETH_RPC_URL = os.getenv("ETH_RPC_URL", "")
 ETH_PRIVATE_KEY = os.getenv("ETH_PRIVATE_KEY", "")
-CHAIN_ID = int(os.getenv("CHAIN_ID", "11155111"))  # Sepolia
+CHAIN_ID = int(os.getenv("CHAIN_ID", "1"))  # Ethereum mainnet
+ENABLE_MAINNET_TRANSACTIONS = os.getenv("ENABLE_MAINNET_TRANSACTIONS", "0") == "1"
 TO_ADDRESS_ENV = os.getenv("TO_ADDRESS", "")
 GAS_PRICE_GWEI = os.getenv("GAS_PRICE_GWEI", "")
 
@@ -82,6 +83,10 @@ if w3 and ETH_PRIVATE_KEY:
 def _build_tx(prediction: str):
     if w3 is None or wallet_address is None:
         raise RuntimeError("Blockchain not configured. Set ETH_RPC_URL and ETH_PRIVATE_KEY in .env")
+    if CHAIN_ID == 1 and not ENABLE_MAINNET_TRANSACTIONS:
+        raise RuntimeError(
+            "Mainnet logging is disabled. Set ENABLE_MAINNET_TRANSACTIONS=1 in .env to send real transactions."
+        )
 
     to_address = TO_ADDRESS_ENV if TO_ADDRESS_ENV else wallet_address
     nonce = w3.eth.get_transaction_count(wallet_address, "pending")
@@ -226,6 +231,8 @@ def main():
         print("Warning: ETH_RPC_URL not set. Blockchain logging will fail.")
     if not ETH_PRIVATE_KEY:
         print("Warning: ETH_PRIVATE_KEY not set. Blockchain logging will fail.")
+    if CHAIN_ID == 1 and not ENABLE_MAINNET_TRANSACTIONS:
+        print("Warning: CHAIN_ID=1 but ENABLE_MAINNET_TRANSACTIONS is not set. Mainnet logging is disabled.")
 
     watcher_thread = threading.Thread(target=start_file_watcher, daemon=True)
     watcher_thread.start()
