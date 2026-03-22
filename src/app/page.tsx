@@ -22,7 +22,7 @@ export default function Home() {
       src="/brand/sigils/whm-sigil.svg"
       alt="WHM Sigil"
       width={420}
-      height={220}
+      height={241}
       className="whm-sigil-solid"
     />
   </div>
