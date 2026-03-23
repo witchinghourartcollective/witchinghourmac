@@ -1,5 +1,16 @@
 import "./globals.css";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Witching Hour Music",
+  description: "Witching Hour Music and Art Collective.",
+  icons: {
+    icon: "/brand/sigils/whm-sigil%20edit%203.22.26%20v2.svg",
+    shortcut: "/brand/sigils/whm-sigil%20edit%203.22.26%20v2.svg",
+    apple: "/brand/sigils/whm-sigil%20edit%203.22.26%20v2.svg",
+  },
+};
 
 export default function RootLayout({
   children,
@@ -14,12 +25,7 @@ export default function RootLayout({
           <nav aria-label="Primary">
             <Link href="/ritual">Ritual</Link>
             <Link href="/sigils">Sigils</Link>
-            <Link href="/about">About</Link>
-            <Link href="/nft">NFT</Link>
-            <Link href="/mint">Mint</Link>
-            <Link href="/litepaper">Litepaper</Link>
-            <Link href="/press">Press</Link>
-            <Link href="/access">Access</Link>
+            <Link href="/token">hOUR Token</Link>
             <Link href="/calendar">Calendar</Link>
             <Link href="/links">Links</Link>
             <Link href="/esp32">ESP32</Link>

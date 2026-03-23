@@ -248,6 +248,75 @@ main {
     drop-shadow(0 0 24px rgba(220, 220, 220, 0.25));
 }
 
+.whm-home-title {
+  color: var(--ink-main);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  line-height: 1.05;
+}
+
+.whm-home-kicker {
+  font-size: 0.82rem;
+  margin-top: 1rem;
+  opacity: 0.82;
+}
+
+.whm-home-shell {
+  text-wrap: balance;
+}
+
+.whm-home-copy {
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.whm-home-copy p {
+  font-size: 1rem;
+  line-height: 1.9;
+  letter-spacing: 0.01em;
+  margin-top: 1.2rem;
+}
+
+.whm-token-kicker {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  opacity: 0.75;
+}
+
+.whm-token-title {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+
+.whm-token-copy {
+  max-width: 42rem;
+  font-size: 1rem;
+  line-height: 1.9;
+  letter-spacing: 0.01em;
+  opacity: 0.9;
+}
+
+.whm-token-link,
+.whm-token-link:link,
+.whm-token-link:visited,
+.whm-token-link:active {
+  color: var(--ink-main);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+.whm-token-link:hover,
+.whm-token-link:focus-visible {
+  color: #ffffff;
+  outline: none;
+}
+
 .primary-sigil-footer {
   position: fixed;
   left: 50%;
@@ -256,6 +325,63 @@ main {
   color: #000;
   pointer-events: none;
   z-index: 20;
+}
+
+.whm-footer-nav {
+  position: relative;
+  z-index: 2;
+  padding: 0 1.5rem 2.5rem;
+}
+
+.whm-footer-nav nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.9rem 1.4rem;
+  margin: 0 auto;
+  max-width: 980px;
+}
+
+.whm-footer-nav a,
+.whm-footer-nav a:link,
+.whm-footer-nav a:visited,
+.whm-footer-nav a:active {
+  color: var(--ink-main);
+  opacity: 0.88;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  padding: 0.2rem 0;
+  border-bottom: 1px solid rgba(207, 199, 216, 0.35);
+  transition:
+    opacity 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.whm-footer-nav a:hover,
+.whm-footer-nav a:visited:hover,
+.whm-footer-nav a:focus-visible {
+  opacity: 1;
+  color: #ffffff;
+  border-bottom-color: rgba(255, 255, 255, 0.9);
+  outline: none;
+}
+
+@media (max-width: 640px) {
+  .whm-footer-nav {
+    padding: 0 1.25rem 2rem;
+  }
+
+  .whm-footer-nav nav {
+    gap: 0.75rem 1rem;
+  }
+
+  .whm-footer-nav a {
+    letter-spacing: 0.14em;
+    font-size: 0.68rem;
+  }
 }
 
 .primary-sigil-footer img {

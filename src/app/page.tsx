@@ -1,16 +1,15 @@
-import Link from "next/link";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <main style={{ padding: 48, maxWidth: 900, margin: "0 auto" }}>
-      <h1>Witching Hour</h1>
+    <main className="whm-home-shell" style={{ padding: 48, maxWidth: 900, margin: "0 auto" }}>
+      <h1 className="whm-home-title">Witching Hour Music</h1>
 
-      <p>
+      <p className="whm-home-title whm-home-kicker">
         Welcome to the Witching Hour Music & Art Collective.
       </p>
 
-<section>
+<section className="whm-home-copy">
   <p>
     Witching Hour is a signal — a convergence of sound, symbol, and system.
     We work at the intersection of music, art, technology, and ritual,
@@ -19,7 +18,7 @@ export default function Home() {
 
   <div className="whm-sigil-solid-wrap" aria-hidden="true">
     <Image
-      src="/brand/sigils/whm-sigil.svg"
+      src="/brand/sigils/whm-sigil%20edit%203.22.26%20v2.svg"
       alt="WHM Sigil"
       width={420}
       height={241}
@@ -34,30 +33,10 @@ export default function Home() {
 
   <p>
     Our NFT layer is designed for long-term creative access: music, visuals,
-    studio sessions, and collaboration. See the About page for the live
-    framework and utilities.
+    studio sessions, and collaboration. See the hOUR Token page for the live
+    framework, About notes, and access links.
   </p>
 </section>
-
-
-      <hr />
-
-      <nav>
-        <ul style={{ lineHeight: "2em" }}>
-          <li><Link href="/ritual">Ritual</Link></li>
-          <li><Link href="/sigils">Sigils</Link></li>
-          <li><Link href="/about">About</Link></li>
-          <li><Link href="/nft">NFT</Link></li>
-          <li><Link href="/mint">Mint</Link></li>
-          <li><Link href="/litepaper">Litepaper</Link></li>
-          <li><Link href="/press">Press</Link></li>
-          <li><Link href="/access">Access</Link></li>
-          <li><Link href="/calendar">Calendar</Link></li>
-          <li><Link href="/links">Links</Link></li>
-          <li><Link href="/esp32">ESP32</Link></li>
-          <li><Link href="/dashboard">WAX Dashboard</Link></li>
-        </ul>
-      </nav>
     </main>
   );
 }
