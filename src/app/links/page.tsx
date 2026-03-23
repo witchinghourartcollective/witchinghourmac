@@ -20,7 +20,7 @@ export default function Links() {
 
         <div className="whm-links-block">
           <p className="whm-token-kicker">Elsewhere</p>
-          <ul className="whm-links-list">
+          <ul className="whm-links-list" aria-label="Social links">
             <li>
               <a
                 href="https://instagram.com/fletchervaughn"

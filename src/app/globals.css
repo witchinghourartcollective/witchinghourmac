@@ -72,6 +72,32 @@ body::after {
   z-index: 0;
 }
 
+a,
+a:link,
+a:visited,
+a:active {
+  color: var(--ink-main);
+  opacity: 0.88;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  border-bottom: 1px solid rgba(207, 199, 216, 0.35);
+  transition:
+    opacity 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+a:hover,
+a:visited:hover,
+a:focus-visible {
+  opacity: 1;
+  color: #ffffff;
+  border-bottom-color: rgba(255, 255, 255, 0.9);
+  outline: none;
+}
+
 main {
   position: relative;
   z-index: 1;
@@ -468,20 +494,11 @@ main {
 .whm-links-anchor:link,
 .whm-links-anchor:visited,
 .whm-links-anchor:active {
-  color: var(--ink-main);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(207, 199, 216, 0.35);
   padding-bottom: 0.15rem;
-  transition:
-    color 180ms ease,
-    border-color 180ms ease,
-    opacity 180ms ease;
 }
 
 .whm-links-anchor:hover,
 .whm-links-anchor:focus-visible {
-  color: #ffffff;
-  border-bottom-color: rgba(255, 255, 255, 0.9);
   outline: none;
 }
 
