@@ -271,11 +271,23 @@ main {
   margin: 0 auto;
 }
 
+.whm-home-hero {
+  margin: 1.5rem 0 2rem;
+  padding: 1.75rem 1.5rem 2rem;
+  border: 1px solid rgba(207, 199, 216, 0.14);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 0 48px rgba(122, 74, 168, 0.08);
+}
+
 .whm-home-copy p {
   font-size: 1rem;
   line-height: 1.9;
   letter-spacing: 0.01em;
   margin-top: 1.2rem;
+}
+
+.whm-home-hero p:first-child {
+  margin-top: 0;
 }
 
 .whm-token-kicker {
