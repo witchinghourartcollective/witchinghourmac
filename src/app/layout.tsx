@@ -23,8 +23,14 @@ export default function RootLayout({
         {children}
         <footer className="whm-footer-nav">
           <nav aria-label="Primary">
-            <Link href="/ritual">Ritual</Link>
-            <Link href="/sigils">Sigils</Link>
+            <div className="whm-footer-group">
+              <Link href="/rich-jewelz" className="whm-footer-group-title">RICH JEWELZ</Link>
+              <p className="whm-footer-group-copy">ritualz, sigilz, and signal work</p>
+              <div className="whm-footer-subnav">
+                <Link href="/ritual">Ritual</Link>
+                <Link href="/sigils">Sigils</Link>
+              </div>
+            </div>
             <Link href="/token">hOUR Token</Link>
             <Link href="/calendar">Calendar</Link>
             <Link href="/links">Links</Link>
