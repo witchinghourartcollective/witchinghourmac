@@ -423,6 +423,68 @@ main {
   margin-top: 2rem;
 }
 
+.whm-links-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+}
+
+.whm-links-panel {
+  width: min(100%, 42rem);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  text-align: center;
+}
+
+.whm-links-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  align-items: center;
+}
+
+.whm-links-copy {
+  margin: 0;
+  max-width: 32rem;
+  font-size: 1rem;
+  line-height: 1.9;
+  letter-spacing: 0.01em;
+  opacity: 0.9;
+}
+
+.whm-links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.whm-links-anchor,
+.whm-links-anchor:link,
+.whm-links-anchor:visited,
+.whm-links-anchor:active {
+  color: var(--ink-main);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(207, 199, 216, 0.35);
+  padding-bottom: 0.15rem;
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    opacity 180ms ease;
+}
+
+.whm-links-anchor:hover,
+.whm-links-anchor:focus-visible {
+  color: #ffffff;
+  border-bottom-color: rgba(255, 255, 255, 0.9);
+  outline: none;
+}
+
 @media (max-width: 640px) {
   .whm-footer-nav {
     padding: 0 1.25rem 2rem;

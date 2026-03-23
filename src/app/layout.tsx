@@ -32,7 +32,6 @@ export default function RootLayout({
               </div>
             </div>
             <Link href="/token">hOUR Token</Link>
-            <Link href="/calendar">Calendar</Link>
             <Link href="/links">Links</Link>
             <Link href="/esp32">ESP32</Link>
             <Link href="/dashboard">WAX Dashboard</Link>

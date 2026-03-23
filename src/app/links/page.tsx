@@ -1,27 +1,45 @@
 export default function Links() {
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center gap-8 px-6 text-center">
-      <h1 className="text-sm tracking-[0.4em] uppercase opacity-80">
-        Links
-      </h1>
-      <ul className="space-y-3 text-sm">
-        <li>
-          <a
-            href="https://instagram.com/fletchervaughn"
-            className="underline decoration-[#c7a24b] underline-offset-4 hover:opacity-90"
-          >
-            Instagram
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://youtube.com/witchinghourmac"
-            className="underline decoration-[#c7a24b] underline-offset-4 hover:opacity-90"
-          >
-            YouTube
-          </a>
-        </li>
-      </ul>
+    <main className="whm-links-shell">
+      <section className="whm-links-panel">
+        <h1 className="whm-home-title">Links</h1>
+
+        <div className="whm-links-block">
+          <p className="whm-token-kicker">Availability</p>
+          <p className="whm-links-copy">
+            <a
+              href="https://calendar.app.google/B4CX5ZnMk6movn1B7"
+              target="_blank"
+              rel="noreferrer"
+              className="whm-links-anchor"
+            >
+              Book time with Fletcher Vaughn
+            </a>
+          </p>
+        </div>
+
+        <div className="whm-links-block">
+          <p className="whm-token-kicker">Elsewhere</p>
+          <ul className="whm-links-list">
+            <li>
+              <a
+                href="https://instagram.com/fletchervaughn"
+                className="whm-links-anchor"
+              >
+                Instagram
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://youtube.com/witchinghourmac"
+                className="whm-links-anchor"
+              >
+                YouTube
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
     </main>
   );
 }
