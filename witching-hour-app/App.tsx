@@ -2,48 +2,44 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   Animated,
   Dimensions,
+  Linking,
+  Platform,
+  Pressable,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
-  View,
-  Pressable
+  View
 } from "react-native";
 import { Audio } from "expo-av";
 
 const ROOMS = [
   {
-    id: "foyer",
-    title: "Foyer",
-    description: "Enter the house. Whispered light. Ritual artifacts.",
-    mood: "A vestibule of black glass and slow ember light."
+    id: "entry",
+    title: "The Entry",
+    description: "A ritual threshold for drops, private access, and collector identity.",
+    mood: "Black glass, violet static, and a low green signal."
+  },
+  {
+    id: "shop",
+    title: "The Shop Floor",
+    description: "Commercial structure with the scan rhythm of a strong Shopify homepage.",
+    mood: "A clean product cadence under underground light."
+  },
+  {
+    id: "access",
+    title: "Access",
+    description: "Genesis keys, utility tiers, and a direct entry message.",
+    mood: "An invitation, not a product page."
   },
   {
     id: "studio",
     title: "Studio",
-    description: "Commissioned soundscapes and session bookings.",
-    mood: "Walls breathe in maroon haze. The console glows gold."
-  },
-  {
-    id: "gallery",
-    title: "Gallery",
-    description: "Artworks hung in a moving corridor of light.",
-    mood: "Frames float in green fog, shifting with your steps."
-  },
-  {
-    id: "vault",
-    title: "NFT Vault",
-    description: "Token-gated pieces and collector editions.",
-    mood: "A dark prism chamber. Sigils hum in ultraviolet."
-  },
-  {
-    id: "attic",
-    title: "Attic",
-    description: "Behind-the-scenes experiments and lore.",
-    mood: "Dust motes orbit in a purple beam."
+    description: "Bookings, commissions, and production offers with clear conversion paths.",
+    mood: "Warm ember light across precision gear."
   }
-];
+] as const;
 
 const TRACKS = [
   {
@@ -54,57 +50,66 @@ const TRACKS = [
   }
 ];
 
-const ARTWORKS = [
+const PRODUCTS = [
   {
-    id: "art-1",
-    title: "Ash Bloom",
-    medium: "Ink + light",
-    note: "Replace with your artwork image."
+    id: "drop-1",
+    category: "Collector Access",
+    title: "Genesis Key",
+    price: "0.0333 ETH",
+    note: "333 fixed. Early access to music, visual work, and private sessions."
   },
   {
-    id: "art-2",
-    title: "Black Glass",
-    medium: "Digital painting",
-    note: "Replace with your artwork image."
+    id: "drop-2",
+    category: "Physical / Digital",
+    title: "Studio Object 001",
+    price: "$180",
+    note: "A storefront slot for prints, ritual hardware, or limited merch."
   },
   {
-    id: "art-3",
-    title: "Ritual Frame",
-    medium: "Mixed media",
-    note: "Replace with your artwork image."
+    id: "drop-3",
+    category: "Music Drop",
+    title: "Signal Pack",
+    price: "$44",
+    note: "Exclusive stems, unreleased audio, and collector notes."
   }
 ];
 
-const NFTS = [
+const ACCESS_COLUMNS = [
   {
-    id: "nft-1",
-    title: "Sigil Room",
-    edition: "1/1",
-    status: "Reserved"
+    id: "access-1",
+    title: "Genesis",
+    detail: "333 keys",
+    status: "Foundation / Origin"
   },
   {
-    id: "nft-2",
-    title: "Night Corridor",
-    edition: "1/5",
-    status: "Available"
+    id: "access-2",
+    title: "Alignment",
+    detail: "777 keys",
+    status: "Expansion / Momentum"
+  },
+  {
+    id: "access-3",
+    title: "Ritual",
+    detail: "666 keys",
+    status: "Selective / Edge"
   }
 ];
 
-const BOOKINGS = [
+const OFFERINGS = [
   {
-    id: "booking-1",
+    id: "offer-1",
     title: "Studio Session",
     price: "$350",
     detail: "3 hours, tracking + mix notes."
   },
   {
-    id: "booking-2",
+    id: "offer-2",
     title: "Commission",
     price: "$750",
     detail: "Custom soundscape, 2 rounds."
   },
   {
-    id: "booking-3",
+    id: "offer-3",
     title: "Live Ritual",
     price: "$1,800",
     detail: "Performance + installation."
@@ -112,25 +117,45 @@ const BOOKINGS = [
 ];
 
 const THEME = {
-  ink: "#050507",
-  void: "#0b0b12",
-  smoke: "#111218",
-  ember: "#7b2a1e",
-  ash: "#bdb3a7",
-  mist: "#7c7a85",
-  glow: "#efe7dc",
-  green: "#0f3b2b",
-  purple: "#2b103f",
-  maroon: "#3b1014",
-  gold: "#d1b15a"
+  ink: "#07060b",
+  void: "#0d0b14",
+  smoke: "#151224",
+  violet: "#7a4aa8",
+  magenta: "#b44fff",
+  ember: "#c04a3a",
+  greenGlow: "#7cffc6",
+  goldGlow: "#e6c97a",
+  ash: "#cfc7d8",
+  mist: "#9a92a8",
+  white: "#f6f1ff"
+};
+
+const BASE_MAINNET_PARAMS = {
+  chainId: "0x2105",
+  chainName: "Base",
+  nativeCurrency: {
+    name: "Ether",
+    symbol: "ETH",
+    decimals: 18
+  },
+  rpcUrls: ["https://mainnet.base.org"],
+  blockExplorerUrls: ["https://basescan.org"]
+};
+
+type InjectedProvider = {
+  request: (args: { method: string; params?: unknown[] }) => Promise<unknown>;
 };
 
 export default function App() {
-  const [roomId, setRoomId] = useState(ROOMS[0].id);
+  const [roomId, setRoomId] = useState<(typeof ROOMS)[number]["id"]>(ROOMS[0].id);
   const [playing, setPlaying] = useState(false);
   const [sound, setSound] = useState<Audio.Sound | null>(null);
   const [transitionKey, setTransitionKey] = useState(0);
   const [loggingOut, setLoggingOut] = useState(false);
+  const [baseAddress, setBaseAddress] = useState<string | null>(null);
+  const [baseStatus, setBaseStatus] = useState("Wallet not connected");
+  const [baseError, setBaseError] = useState<string | null>(null);
+  const [baseBusy, setBaseBusy] = useState(false);
   const travel = useRef(new Animated.Value(0)).current;
   const shimmer = useRef(new Animated.Value(0)).current;
   const logoutFade = useRef(new Animated.Value(0)).current;
@@ -185,6 +210,63 @@ export default function App() {
     setLoggingOut(false);
   };
 
+  const handleBaseSignIn = async () => {
+    if (Platform.OS !== "web") {
+      setBaseError("Use the web preview for wallet connection.");
+      setBaseStatus("Open the web build to connect.");
+      return;
+    }
+
+    const provider = (
+      globalThis as typeof globalThis & {
+        ethereum?: InjectedProvider;
+      }
+    ).ethereum;
+
+    if (!provider) {
+      setBaseError("No injected wallet found. Install Coinbase Wallet or MetaMask.");
+      setBaseStatus("Wallet unavailable");
+      return;
+    }
+
+    setBaseBusy(true);
+    setBaseError(null);
+    setBaseStatus("Connecting to Base...");
+
+    try {
+      try {
+        await provider.request({
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId: BASE_MAINNET_PARAMS.chainId }]
+        });
+      } catch {
+        await provider.request({
+          method: "wallet_addEthereumChain",
+          params: [BASE_MAINNET_PARAMS]
+        });
+      }
+
+      const accounts = (await provider.request({
+        method: "eth_requestAccounts"
+      })) as string[];
+
+      const address = accounts?.[0];
+      if (!address) {
+        throw new Error("No wallet address returned.");
+      }
+
+      setBaseAddress(address);
+      setBaseStatus("Connected on Base");
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Wallet connection failed";
+      setBaseError(message);
+      setBaseStatus("Wallet not connected");
+    } finally {
+      setBaseBusy(false);
+    }
+  };
+
   const handleTogglePlayback = async () => {
     if (!track.previewUrl) {
       setPlaying((prev) => !prev);
@@ -234,12 +316,45 @@ export default function App() {
       <StatusBar barStyle="light-content" />
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.hero}>
-          <Text style={styles.eyebrow}>Witching Hour</Text>
-          <Text style={styles.title}>Walk the House</Text>
+          <View style={styles.topBar}>
+            <Text style={styles.brandMark}>WHM</Text>
+            <View style={styles.navRow}>
+              <Text style={styles.navItem}>About</Text>
+              <Text style={styles.navItem}>Access</Text>
+              <Text style={styles.navItem}>Drops</Text>
+              <Text style={styles.navItem}>Studio</Text>
+            </View>
+          </View>
+          <Text style={styles.eyebrow}>Witching Hour Music</Text>
+          <Text style={styles.title}>Signal, Symbol, System.</Text>
           <Text style={styles.subtitle}>
-            A cross-platform ritual space for music, art, NFTs, and
-            commission bookings.
+            A ritual storefront built with the visual language of
+            `witchinghourmac.com` and the scan rhythm of a Shopify front page.
           </Text>
+          <Text style={styles.manifesto}>
+            This is not passive content. This is an access point for music,
+            collector objects, private drops, and real studio work.
+          </Text>
+          <View style={styles.heroActions}>
+            <Pressable
+              style={styles.primaryHeroButton}
+              onPress={() => Linking.openURL("https://witchinghourmac.com")}
+            >
+              <Text style={styles.primaryHeroButtonText}>Enter Main Site</Text>
+            </Pressable>
+            <Pressable style={styles.secondaryHeroButton} onPress={handleBaseSignIn}>
+              <Text style={styles.secondaryHeroButtonText}>
+                {baseBusy ? "Connecting..." : "Connect on Base"}
+              </Text>
+            </Pressable>
+          </View>
+          <View style={styles.heroFooter}>
+            <Text style={styles.heroFooterLabel}>Wallet</Text>
+            <Text style={styles.heroFooterValue}>
+              {baseAddress ?? "No wallet connected"}
+            </Text>
+          </View>
+          {baseError ? <Text style={styles.baseError}>{baseError}</Text> : null}
         </View>
 
         <View style={styles.roomStrip}>
@@ -297,7 +412,7 @@ export default function App() {
               <Text style={styles.roomMood}>{currentRoom.mood}</Text>
               <View style={styles.roomActions}>
                 <Text style={styles.roomHint}>
-                  Tap other rooms to keep walking.
+                  Move across surfaces to preview the site architecture.
                 </Text>
                 <Pressable style={styles.exitButton} onPress={handleLogOut}>
                   <Text style={styles.exitButtonText}>Exit the House</Text>
@@ -308,10 +423,63 @@ export default function App() {
         </View>
 
         <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Collector Access</Text>
+          <Text style={styles.sectionCopy}>
+            The copy is sparse and direct, matching the live site&apos;s tone:
+            access first, hype nowhere.
+          </Text>
+          <View style={styles.baseCard}>
+            <View style={styles.baseMeta}>
+              <Text style={styles.baseLabel}>Status</Text>
+              <Text style={styles.baseStatus}>{baseStatus}</Text>
+              <Text style={styles.baseHint}>
+                {baseAddress
+                  ? `Connected wallet: ${baseAddress}`
+                  : "Connect an injected wallet and switch it onto Base Mainnet. This keeps the localhost preview compatible with Expo web and avoids the import.meta crash."}
+              </Text>
+            </View>
+            <Pressable
+              style={[styles.baseButton, baseBusy && styles.baseButtonDisabled]}
+              disabled={baseBusy}
+              onPress={handleBaseSignIn}
+            >
+              <Text style={styles.baseButtonText}>
+                {baseBusy
+                  ? "Connecting..."
+                  : baseAddress
+                    ? "Reconnect Wallet"
+                    : "Connect on Base"}
+              </Text>
+            </Pressable>
+          </View>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Featured Drops</Text>
+          <Text style={styles.sectionCopy}>
+            Product-card cadence inspired by Shopify: fast scan, strong price
+            anchor, clear category label, and immediate CTA potential.
+          </Text>
+          <View style={styles.grid}>
+            {PRODUCTS.map((product) => (
+              <View key={product.id} style={styles.productCard}>
+                <Text style={styles.productCategory}>{product.category}</Text>
+                <Text style={styles.productTitle}>{product.title}</Text>
+                <Text style={styles.productPrice}>{product.price}</Text>
+                <Text style={styles.productNote}>{product.note}</Text>
+                <Pressable style={styles.productButton}>
+                  <Text style={styles.productButtonText}>View Drop</Text>
+                </Pressable>
+              </View>
+            ))}
+          </View>
+        </View>
+
+        <View style={styles.section}>
           <Text style={styles.sectionTitle}>Sound Chamber</Text>
           <Text style={styles.sectionCopy}>
-            Add preview URLs for streaming playback. Use this for albums,
-            commissions, or live session previews.
+            Music still sits near the commercial surfaces so the storefront
+            remains Witching Hour rather than a generic catalog.
           </Text>
           <View style={styles.playerCard}>
             <View style={styles.playerMeta}>
@@ -320,46 +488,30 @@ export default function App() {
             </View>
             <Pressable style={styles.playerButton} onPress={handleTogglePlayback}>
               <Text style={styles.playerButtonText}>
-                {playing ? "Pause" : "Play"}
+                {playing ? "Pause Preview" : "Play Preview"}
               </Text>
             </Pressable>
           </View>
-          {!track.previewUrl && (
+          {!track.previewUrl ? (
             <Text style={styles.playerNote}>
               Add a preview URL in `TRACKS` to enable real playback.
             </Text>
-          )}
+          ) : null}
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Gallery Wing</Text>
+          <Text style={styles.sectionTitle}>Access Structure</Text>
           <Text style={styles.sectionCopy}>
-            Replace the cards with your art images. Each card can open a
-            full-screen walkthrough room.
+            One clear structure per drop. No gimmicks. No dilution. No generic
+            NFT dashboard language.
           </Text>
-          <View style={styles.grid}>
-            {ARTWORKS.map((art) => (
-              <View key={art.id} style={styles.artCard}>
-                <Text style={styles.artTitle}>{art.title}</Text>
-                <Text style={styles.artMeta}>{art.medium}</Text>
-                <Text style={styles.artNote}>{art.note}</Text>
-              </View>
-            ))}
-          </View>
-        </View>
-
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>NFT Vault</Text>
-          <Text style={styles.sectionCopy}>
-            Hook this section to your chain indexer or marketplace API.
-          </Text>
-          {NFTS.map((nft) => (
-            <View key={nft.id} style={styles.nftRow}>
+          {ACCESS_COLUMNS.map((column) => (
+            <View key={column.id} style={styles.accessRow}>
               <View>
-                <Text style={styles.nftTitle}>{nft.title}</Text>
-                <Text style={styles.nftMeta}>{nft.edition}</Text>
+                <Text style={styles.accessTitle}>{column.title}</Text>
+                <Text style={styles.accessMeta}>{column.detail}</Text>
               </View>
-              <Text style={styles.nftStatus}>{nft.status}</Text>
+              <Text style={styles.accessStatus}>{column.status}</Text>
             </View>
           ))}
         </View>
@@ -367,10 +519,10 @@ export default function App() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Bookings + Commissions</Text>
           <Text style={styles.sectionCopy}>
-            Stripe checkout will live here. Each tier can link to a paid
-            booking flow.
+            Commercial offers sit below the mythic brand layer, the same way a
+            strong storefront separates identity from checkout friction.
           </Text>
-          {BOOKINGS.map((booking) => (
+          {OFFERINGS.map((booking) => (
             <View key={booking.id} style={styles.bookingRow}>
               <View>
                 <Text style={styles.bookingTitle}>{booking.title}</Text>
@@ -380,14 +532,15 @@ export default function App() {
             </View>
           ))}
           <Pressable style={styles.bookingButton}>
-            <Text style={styles.bookingButtonText}>Start Booking</Text>
+            <Text style={styles.bookingButtonText}>Request Genesis Access</Text>
           </Pressable>
         </View>
 
         <View style={styles.footer}>
           <Text style={styles.footerText}>
-            Replace text + data with your real catalog and connect Stripe +
-            NFT APIs when ready.
+            Current fix: removed the SDK path that was throwing `import.meta`
+            under Expo web. Base connection now uses the browser wallet provider
+            directly so localhost previewing stays viable.
           </Text>
         </View>
       </ScrollView>
@@ -427,28 +580,104 @@ const styles = StyleSheet.create({
     gap: 24
   },
   hero: {
-    padding: 20,
-    borderRadius: 20,
+    padding: 24,
+    borderRadius: 24,
     backgroundColor: THEME.void,
     borderWidth: 1,
-    borderColor: "#1d1d28"
+    borderColor: "rgba(255,255,255,0.08)"
+  },
+  topBar: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: 12,
+    marginBottom: 18
+  },
+  brandMark: {
+    color: THEME.white,
+    fontSize: 18,
+    letterSpacing: 6,
+    fontWeight: "700"
+  },
+  navRow: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "flex-end",
+    gap: 10
+  },
+  navItem: {
+    color: THEME.mist,
+    textTransform: "uppercase",
+    letterSpacing: 2,
+    fontSize: 10
   },
   eyebrow: {
     textTransform: "uppercase",
-    letterSpacing: 2,
+    letterSpacing: 3,
     color: THEME.mist,
     fontSize: 12,
     marginBottom: 8
   },
   title: {
-    fontSize: 32,
-    color: THEME.glow,
+    fontSize: 34,
+    color: THEME.white,
     fontWeight: "600"
   },
   subtitle: {
     marginTop: 12,
     color: THEME.ash,
-    lineHeight: 20
+    lineHeight: 22,
+    fontSize: 15
+  },
+  manifesto: {
+    marginTop: 14,
+    color: THEME.mist,
+    lineHeight: 22
+  },
+  heroActions: {
+    marginTop: 22,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 12
+  },
+  primaryHeroButton: {
+    paddingVertical: 12,
+    paddingHorizontal: 18,
+    borderRadius: 999,
+    backgroundColor: THEME.white
+  },
+  primaryHeroButtonText: {
+    color: THEME.ink,
+    fontWeight: "700"
+  },
+  secondaryHeroButton: {
+    paddingVertical: 12,
+    paddingHorizontal: 18,
+    borderRadius: 999,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.16)",
+    backgroundColor: "rgba(180,79,255,0.12)"
+  },
+  secondaryHeroButtonText: {
+    color: THEME.white,
+    fontWeight: "700"
+  },
+  heroFooter: {
+    marginTop: 18,
+    paddingTop: 16,
+    borderTopWidth: 1,
+    borderTopColor: "rgba(255,255,255,0.08)",
+    gap: 4
+  },
+  heroFooterLabel: {
+    color: THEME.mist,
+    textTransform: "uppercase",
+    fontSize: 10,
+    letterSpacing: 2
+  },
+  heroFooterValue: {
+    color: THEME.greenGlow,
+    fontSize: 13
   },
   roomStrip: {
     flexDirection: "row",
@@ -464,15 +693,15 @@ const styles = StyleSheet.create({
     backgroundColor: THEME.smoke
   },
   roomChipActive: {
-    borderColor: THEME.ember,
-    backgroundColor: "#1c0f0b"
+    borderColor: THEME.magenta,
+    backgroundColor: "rgba(180,79,255,0.12)"
   },
   roomChipText: {
     color: THEME.ash,
     fontSize: 13
   },
   roomChipTextActive: {
-    color: THEME.glow
+    color: THEME.white
   },
   sceneFrame: {
     height: 240,
@@ -480,7 +709,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     backgroundColor: "#0a0a10",
     borderWidth: 1,
-    borderColor: "#222232"
+    borderColor: "rgba(255,255,255,0.08)"
   },
   sceneRoom: {
     flex: 1,
@@ -497,7 +726,7 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     width: "32%",
-    backgroundColor: "#1d5c43",
+    backgroundColor: "#124734",
     opacity: 0.9,
     zIndex: 1
   },
@@ -507,7 +736,7 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     width: "32%",
-    backgroundColor: "#4b1b6f",
+    backgroundColor: "#4d246b",
     opacity: 0.85,
     zIndex: 1
   },
@@ -517,7 +746,7 @@ const styles = StyleSheet.create({
     right: "20%",
     top: "16%",
     bottom: "16%",
-    backgroundColor: "#5a1a22",
+    backgroundColor: "#241a3e",
     borderWidth: 1,
     borderColor: "#3a3a4a",
     opacity: 0.9,
@@ -531,8 +760,8 @@ const styles = StyleSheet.create({
     height: "24%",
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: "#d1b15a",
-    backgroundColor: "rgba(209, 177, 90, 0.18)",
+    borderColor: THEME.goldGlow,
+    backgroundColor: "rgba(230, 201, 122, 0.18)",
     zIndex: 3
   },
   sceneFloor: {
@@ -552,7 +781,7 @@ const styles = StyleSheet.create({
     right: "25%",
     top: "10%",
     bottom: "10%",
-    backgroundColor: THEME.gold,
+    backgroundColor: THEME.magenta,
     opacity: 0.18,
     borderRadius: 999,
     zIndex: 4
@@ -565,7 +794,7 @@ const styles = StyleSheet.create({
   },
   roomTitle: {
     fontSize: 22,
-    color: THEME.glow,
+    color: THEME.white,
     marginBottom: 8
   },
   roomDesc: {
@@ -604,18 +833,115 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 20,
-    color: THEME.glow
+    color: THEME.white
   },
   sectionCopy: {
     color: THEME.ash,
     lineHeight: 20
   },
+  baseCard: {
+    padding: 16,
+    borderRadius: 16,
+    backgroundColor: "rgba(122,74,168,0.12)",
+    borderWidth: 1,
+    borderColor: "rgba(124,255,198,0.16)",
+    gap: 14
+  },
+  baseMeta: {
+    gap: 6
+  },
+  baseLabel: {
+    color: THEME.greenGlow,
+    textTransform: "uppercase",
+    letterSpacing: 1.5,
+    fontSize: 11
+  },
+  baseStatus: {
+    color: THEME.white,
+    fontSize: 17,
+    fontWeight: "600"
+  },
+  baseHint: {
+    color: THEME.ash,
+    lineHeight: 20,
+    fontSize: 13
+  },
+  baseError: {
+    color: "#ffb1b1",
+    fontSize: 12,
+    lineHeight: 18,
+    marginTop: 10
+  },
+  baseButton: {
+    paddingVertical: 12,
+    borderRadius: 999,
+    backgroundColor: THEME.greenGlow,
+    alignItems: "center"
+  },
+  baseButtonDisabled: {
+    opacity: 0.7
+  },
+  baseButtonText: {
+    color: THEME.ink,
+    fontWeight: "700",
+    letterSpacing: 0.3
+  },
+  grid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 12
+  },
+  productCard: {
+    flexBasis: "48%",
+    padding: 16,
+    borderRadius: 14,
+    backgroundColor: "rgba(255,255,255,0.04)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.08)"
+  },
+  productCategory: {
+    color: THEME.mist,
+    textTransform: "uppercase",
+    letterSpacing: 2,
+    fontSize: 10,
+    marginBottom: 10
+  },
+  productTitle: {
+    color: THEME.white,
+    fontSize: 15
+  },
+  productPrice: {
+    color: THEME.greenGlow,
+    marginTop: 8,
+    fontSize: 18,
+    fontWeight: "700"
+  },
+  productNote: {
+    color: THEME.ash,
+    marginTop: 10,
+    fontSize: 12,
+    lineHeight: 18
+  },
+  productButton: {
+    marginTop: 16,
+    alignSelf: "flex-start",
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    borderRadius: 999,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.12)"
+  },
+  productButtonText: {
+    color: THEME.white,
+    fontSize: 12,
+    fontWeight: "600"
+  },
   playerCard: {
     padding: 16,
     borderRadius: 14,
-    backgroundColor: "#101018",
+    backgroundColor: "rgba(255,255,255,0.04)",
     borderWidth: 1,
-    borderColor: "#2c2c3b",
+    borderColor: "rgba(255,255,255,0.08)",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -625,7 +951,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   playerTitle: {
-    color: THEME.glow,
+    color: THEME.white,
     fontSize: 16
   },
   playerArtist: {
@@ -635,77 +961,51 @@ const styles = StyleSheet.create({
   playerButton: {
     paddingVertical: 8,
     paddingHorizontal: 16,
-    backgroundColor: THEME.ember,
+    backgroundColor: THEME.goldGlow,
     borderRadius: 999
   },
   playerButtonText: {
-    color: "#130606",
+    color: THEME.ink,
     fontWeight: "600"
   },
   playerNote: {
     color: THEME.mist,
     fontSize: 12
   },
-  grid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 12
-  },
-  artCard: {
-    flexBasis: "48%",
-    padding: 16,
-    borderRadius: 14,
-    backgroundColor: "#0f0f15",
-    borderWidth: 1,
-    borderColor: "#2b2b3a"
-  },
-  artTitle: {
-    color: THEME.glow,
-    fontSize: 15
-  },
-  artMeta: {
-    color: THEME.mist,
-    marginTop: 6
-  },
-  artNote: {
-    color: THEME.ash,
-    marginTop: 10,
-    fontSize: 12
-  },
-  nftRow: {
+  accessRow: {
     padding: 14,
     borderRadius: 12,
-    backgroundColor: "#11111a",
+    backgroundColor: "rgba(255,255,255,0.04)",
     borderWidth: 1,
-    borderColor: "#2b2b3a",
+    borderColor: "rgba(255,255,255,0.08)",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center"
   },
-  nftTitle: {
-    color: THEME.glow,
+  accessTitle: {
+    color: THEME.white,
     fontSize: 15
   },
-  nftMeta: {
+  accessMeta: {
     color: THEME.mist,
     marginTop: 4
   },
-  nftStatus: {
-    color: THEME.ember,
+  accessStatus: {
+    color: THEME.goldGlow,
     fontWeight: "600"
   },
   bookingRow: {
     padding: 14,
     borderRadius: 12,
-    backgroundColor: "#0f0f18",
+    backgroundColor: "rgba(255,255,255,0.04)",
     borderWidth: 1,
-    borderColor: "#2b2b3a",
+    borderColor: "rgba(255,255,255,0.08)",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center"
   },
   bookingTitle: {
-    color: THEME.glow,
+    color: THEME.white,
     fontSize: 15
   },
   bookingDetail: {
@@ -714,26 +1014,26 @@ const styles = StyleSheet.create({
     fontSize: 12
   },
   bookingPrice: {
-    color: THEME.ember,
+    color: THEME.greenGlow,
     fontWeight: "600"
   },
   bookingButton: {
     marginTop: 8,
     paddingVertical: 12,
     borderRadius: 999,
-    backgroundColor: THEME.glow,
+    backgroundColor: THEME.magenta,
     alignItems: "center"
   },
   bookingButtonText: {
-    color: "#15131a",
+    color: THEME.white,
     fontWeight: "600"
   },
   footer: {
     padding: 20,
     borderRadius: 18,
-    backgroundColor: "#0b0b12",
+    backgroundColor: "rgba(255,255,255,0.03)",
     borderWidth: 1,
-    borderColor: "#1f1f2a"
+    borderColor: "rgba(255,255,255,0.08)"
   },
   footerText: {
     color: THEME.mist,
@@ -761,7 +1061,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#0a0a12"
   },
   logoutTitle: {
-    color: THEME.glow,
+    color: THEME.white,
     fontSize: 16,
     textTransform: "uppercase",
     letterSpacing: 2,
@@ -783,7 +1083,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   reenterButtonText: {
-    color: "#130606",
+    color: THEME.white,
     fontWeight: "600"
   }
 });

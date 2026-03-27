@@ -19,6 +19,24 @@ npm run start
 npm run start:web
 ```
 
+Open `http://localhost:8081/login` in the browser for the current local web preview.
+
+## Base Integration
+
+The web preview now includes a web-safe Base wallet connect flow using the
+browser's injected wallet provider.
+
+- Install dependencies after pulling changes:
+```bash
+npm install
+```
+- The current integration is frontend-only:
+  it switches the user's injected wallet onto Base Mainnet and stores the
+  connected address in app state.
+- This replaces the previous SDK path that crashed Expo web with
+  `cannot use import.meta outside a module`.
+- Production auth still needs backend nonce/signature verification and session creation.
+
 ## Mobile
 ```bash
 npm run start:ios
