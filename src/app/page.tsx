@@ -5,11 +5,13 @@ import { TierGrid } from "@/components/TierGrid";
 import { TokenStatusPanel } from "@/components/TokenStatusPanel";
 import { dropConfig } from "@/lib/drop-config";
 import { getHourTokenStatus } from "@/lib/hourToken";
+import { getTokenStatusPanelData } from "@/lib/token-status-service";
 
 export const revalidate = 300;
 
 export default async function Home() {
   const status = await getHourTokenStatus();
+  const tokenPanelData = getTokenStatusPanelData(status);
 
   return (
     <main className="archive-page">
@@ -33,7 +35,7 @@ export default async function Home() {
         title="hOUR is the utility layer."
         subtitle="This section tracks token state without pretending trading is live when it is not."
       >
-        <TokenStatusPanel status={status} />
+        <TokenStatusPanel data={tokenPanelData} />
       </SectionFrame>
     </main>
   );

@@ -2,11 +2,13 @@ import { getHourTokenStatus } from "@/lib/hourToken";
 import { SectionFrame } from "@/components/SectionFrame";
 import { TokenStatusPanel } from "@/components/TokenStatusPanel";
 import { dropConfig } from "@/lib/drop-config";
+import { getTokenStatusPanelData } from "@/lib/token-status-service";
 
 export const revalidate = 300;
 
 export default async function TokenPage() {
   const status = await getHourTokenStatus();
+  const tokenPanelData = getTokenStatusPanelData(status);
 
   return (
     <main className="archive-page">
@@ -15,7 +17,7 @@ export default async function TokenPage() {
         title={`${dropConfig.token.name} supports the archive.`}
         subtitle="The collection is the public-facing drop. The token stays as utility, rewards, and future access infrastructure."
       >
-        <TokenStatusPanel status={status} />
+        <TokenStatusPanel data={tokenPanelData} />
       </SectionFrame>
       <SectionFrame
         eyebrow="Launch operations"
@@ -29,15 +31,15 @@ export default async function TokenPage() {
           </div>
           <div className="mint-detail-card">
             <p className="mint-detail-card__eyebrow">Owner</p>
-            <p>{status.owner ?? dropConfig.token.ownerControlStatus}</p>
+            <p>{tokenPanelData.ownerStatus}</p>
           </div>
           <div className="mint-detail-card">
             <p className="mint-detail-card__eyebrow">Trading</p>
-            <p>{status.tradingEnabled ? "Enabled" : "Not active"}</p>
+            <p>{tokenPanelData.tradingEnabled ? "Enabled" : "Not active"}</p>
           </div>
           <div className="mint-detail-card">
             <p className="mint-detail-card__eyebrow">Liquidity</p>
-            <p>{dropConfig.token.liquidityLive ? "Live" : "Pending"}</p>
+            <p>{tokenPanelData.liquidityLive ? "Live" : "Pending"}</p>
           </div>
         </div>
       </SectionFrame>

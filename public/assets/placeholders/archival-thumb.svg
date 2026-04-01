@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-labelledby="title desc">
+  <title id="title">Archival thumbnail placeholder</title>
+  <desc id="desc">A neutral thumbnail placeholder used when artifact thumbnails are not available.</desc>
+  <rect width="800" height="800" fill="#15120f"/>
+  <rect x="74" y="74" width="652" height="652" rx="22" fill="none" stroke="#837764" stroke-opacity="0.32"/>
+  <rect x="132" y="190" width="528" height="6" fill="#8d816d" fill-opacity="0.18"/>
+  <rect x="132" y="290" width="472" height="6" fill="#8d816d" fill-opacity="0.14"/>
+  <rect x="132" y="390" width="498" height="6" fill="#8d816d" fill-opacity="0.15"/>
+  <rect x="132" y="490" width="438" height="6" fill="#8d816d" fill-opacity="0.12"/>
+  <rect x="132" y="590" width="482" height="6" fill="#8d816d" fill-opacity="0.11"/>
+</svg>

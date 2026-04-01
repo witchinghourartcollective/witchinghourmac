@@ -30,6 +30,7 @@ export const siteConfig: SiteConfig = {
     primary: [
       { href: "/", label: "Archive" },
       { href: "/collection", label: "Collection" },
+      { href: "/profile", label: "Profile" },
       { href: "/mint", label: "Mint" },
       { href: "/token", label: "Token" },
       { href: "/access", label: "Access" },
@@ -37,7 +38,7 @@ export const siteConfig: SiteConfig = {
     hero: [
       { href: "/mint", label: "Enter the Archive" },
       { href: "/collection", label: "View Collection" },
-      { href: "/token", label: "See Token Status" },
+      { href: "/profile", label: "Track Progression" },
     ],
     utility: [
       { href: "/about", label: "About" },

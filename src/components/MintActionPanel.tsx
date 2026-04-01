@@ -1,53 +1,36 @@
 import Link from "next/link";
 
-import type { MintState, TierConfig } from "@/lib/drop-config";
-
-const mintStateCopy: Record<
-  MintState,
-  {
-    label: string;
-    description: string;
-    cta: string;
-  }
-> = {
-  comingSoon: {
-    label: "Coming soon",
-    description:
-      "The collection architecture is live, but the primary sale window has not opened yet.",
-    cta: "Mint window not open",
-  },
-  accessRequired: {
-    label: "Access required",
-    description:
-      "Collector access is being staged first. Wallet auth and allowlist logic stay modular for Passport integration.",
-    cta: "Request collector access",
-  },
-  live: {
-    label: "Live",
-    description:
-      "Primary sale is live. Wallet connect and purchase actions can be routed through the modular Passport + Checkout boundary.",
-    cta: "Connect and mint",
-  },
-};
+import { getArtifactAvailabilityLabel } from "@/lib/archive-media";
+import { getTierRewardLabel, getTierStatusLabel, type TierConfig } from "@/lib/drop-config";
+import type { MintActionModel } from "@/lib/mint-flow";
 
 type MintActionPanelProps = {
-  mintState: MintState;
   tier: TierConfig;
+  model: MintActionModel;
 };
 
-export function MintActionPanel({ mintState, tier }: MintActionPanelProps) {
-  const copy = mintStateCopy[mintState];
-
+export function MintActionPanel({ tier, model }: MintActionPanelProps) {
   return (
     <div className="mint-action-panel">
       <div className="mint-action-panel__status">
-        <p className="mint-action-panel__label">{copy.label}</p>
-        <p>{copy.description}</p>
+        <p className="mint-action-panel__label">{model.panelState}</p>
+        <p>{model.mint.summary}</p>
       </div>
       <div className="mint-action-panel__stack">
         <div>
           <p className="mint-action-panel__mini">Selected tier</p>
-          <p className="mint-action-panel__value">{tier.title}</p>
+          <p className="mint-action-panel__value">
+            {tier.title} / {getTierStatusLabel(tier.status)}
+          </p>
+        </div>
+        <div>
+          <p className="mint-action-panel__mini">Selected artifact</p>
+          <p className="mint-action-panel__value">
+            {model.selectedArtifact.title} / {model.selectedArtifact.id}
+          </p>
+          <p className="mint-action-panel__hint">
+            {getArtifactAvailabilityLabel(model.selectedArtifact.availability)}
+          </p>
         </div>
         <div>
           <p className="mint-action-panel__mini">What&apos;s included</p>
@@ -59,20 +42,40 @@ export function MintActionPanel({ mintState, tier }: MintActionPanelProps) {
         </div>
         <div>
           <p className="mint-action-panel__mini">hOUR reward amount</p>
-          <p className="mint-action-panel__value">{tier.rewardLabel}</p>
+          <p className="mint-action-panel__value">{getTierRewardLabel(tier)}</p>
+        </div>
+        <div>
+          <p className="mint-action-panel__mini">Physical included</p>
+          <p className="mint-action-panel__value">
+            {model.selectedArtifact.physicalIncluded ? "Yes" : "No"}
+          </p>
         </div>
       </div>
       <div className="mint-action-panel__cta-group">
-        <Link href={tier.callToAction.href} className="mint-action-panel__cta">
-          {copy.cta}
+        <Link
+          href={model.primaryAction.href}
+          className="mint-action-panel__cta"
+          aria-disabled={model.primaryAction.href === "#"}
+        >
+          {model.primaryAction.label}
         </Link>
         <div className="mint-action-panel__modular">
-          <p>Wallet/Auth Module</p>
-          <span>Passport-ready entry seam</span>
+          <p>{model.wallet.label}</p>
+          <span>
+            {model.wallet.provider ? `${model.wallet.provider} / ` : ""}
+            {model.wallet.summary}
+          </span>
         </div>
         <div className="mint-action-panel__modular">
-          <p>Primary Sale Module</p>
-          <span>Checkout-ready purchase seam</span>
+          <p>{model.access.label}</p>
+          <span>{model.access.summary}</span>
+        </div>
+        <div className="mint-action-panel__modular">
+          <p>{model.mint.label}</p>
+          <span>
+            {model.mint.provider ? `${model.mint.provider} / ` : ""}
+            {model.mint.summary}
+          </span>
         </div>
       </div>
     </div>

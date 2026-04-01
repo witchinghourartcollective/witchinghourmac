@@ -1,80 +1,55 @@
-import type { HourTokenStatus } from "@/lib/hourToken";
-import { dropConfig, type TokenTradingState } from "@/lib/drop-config";
-
-function resolveTradingState(
-  onChainTradingEnabled: boolean | null,
-): TokenTradingState {
-  if (onChainTradingEnabled === true) {
-    return "tradingEnabled";
-  }
-
-  if (dropConfig.token.liquidityLive) {
-    return "liquidityPending";
-  }
-
-  return "notLiveYet";
-}
-
-function statusLabel(state: TokenTradingState) {
-  switch (state) {
-    case "tradingEnabled":
-      return "Trading enabled";
-    case "liquidityPending":
-      return "Liquidity pending";
-    case "notLiveYet":
-    default:
-      return "Not live yet";
-  }
-}
+import type { TokenStatusPanelData } from "@/lib/token-status-service";
 
 type TokenStatusPanelProps = {
-  status?: HourTokenStatus;
+  data: TokenStatusPanelData;
 };
 
-export function TokenStatusPanel({ status }: TokenStatusPanelProps) {
-  const tradingEnabled =
-    status?.tradingEnabled ?? dropConfig.token.tradingEnabled;
-  const launchState = resolveTradingState(status?.tradingEnabled ?? null);
-
+export function TokenStatusPanel({ data }: TokenStatusPanelProps) {
   return (
     <div className="token-status-panel">
       <div className="token-status-panel__headline">
-        <p className="token-status-panel__state">{statusLabel(launchState)}</p>
-        <p className="token-status-panel__summary">{dropConfig.token.utilitySummary}</p>
+        <p className="token-status-panel__state">{data.headline}</p>
+        <p className="token-status-panel__summary">{data.summary}</p>
       </div>
       <dl className="token-status-panel__grid">
         <div>
+          <dt>Network</dt>
+          <dd>{data.network}</dd>
+        </div>
+        <div>
           <dt>Deployed</dt>
-          <dd>{dropConfig.token.deployed ? "Yes" : "No"}</dd>
+          <dd>Yes</dd>
         </div>
         <div>
           <dt>Contract</dt>
           <dd className="token-status-panel__mono">
-            {dropConfig.token.contractAddress}
+            {data.contractAddress}
           </dd>
         </div>
         <div>
           <dt>Trading enabled</dt>
-          <dd>{tradingEnabled ? "Yes" : "No"}</dd>
+          <dd>
+            {data.tradingEnabled === null ? "Unknown" : data.tradingEnabled ? "Yes" : "No"}
+          </dd>
         </div>
         <div>
           <dt>Liquidity live</dt>
-          <dd>{dropConfig.token.liquidityLive ? "Yes" : "No"}</dd>
+          <dd>{data.liquidityLive ? "Yes" : "No"}</dd>
         </div>
         <div>
           <dt>Owner controls</dt>
-          <dd>{dropConfig.token.ownerControlStatus}</dd>
+          <dd>{data.ownerStatus}</dd>
         </div>
         <div>
           <dt>Governance</dt>
-          <dd>{dropConfig.token.governanceStatus}</dd>
+          <dd>{data.governanceStatus}</dd>
         </div>
       </dl>
-      {status ? (
+      {data.fetchedAt || data.fetchError ? (
         <p className="token-status-panel__footnote">
-          {status.fetchError
-            ? `Live read unavailable: ${status.fetchError}`
-            : `Last chain read: ${new Date(status.fetchedAt).toUTCString()}`}
+          {data.fetchError
+            ? `Live read unavailable: ${data.fetchError}`
+            : `Last chain read: ${new Date(data.fetchedAt as string).toUTCString()}`}
         </p>
       ) : null}
     </div>

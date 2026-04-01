@@ -1,25 +1,29 @@
 import Image from "next/image";
 
-import type { ArtifactPreviewConfig } from "@/lib/drop-config";
+import {
+  getArtifactAvailabilityLabel,
+  resolveArtifactImage,
+  type ArtifactEntry,
+} from "@/lib/archive-media";
 
 type ArtifactPreviewProps = {
-  preview: ArtifactPreviewConfig;
+  artifact: ArtifactEntry;
 };
 
-export function ArtifactPreview({ preview }: ArtifactPreviewProps) {
+export function ArtifactPreview({ artifact }: ArtifactPreviewProps) {
   return (
     <figure className="artifact-preview">
       <div className="artifact-preview__frame">
         <Image
-          src={preview.imageSrc}
-          alt={preview.imageAlt}
+          src={resolveArtifactImage(artifact)}
+          alt={artifact.title}
           fill
           sizes="(max-width: 768px) 100vw, 33vw"
           className="artifact-preview__image"
         />
       </div>
       <figcaption className="artifact-preview__caption">
-        {preview.caption}
+        {artifact.id} / {getArtifactAvailabilityLabel(artifact)}
       </figcaption>
     </figure>
   );

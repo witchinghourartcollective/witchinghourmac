@@ -346,9 +346,19 @@ a {
 .tier-card__stats dd,
 .tier-card__includes,
 .mint-action-panel__modular span,
-.token-status-panel__footnote {
+.token-status-panel__footnote,
+.tier-card__meta,
+.mint-action-panel__hint,
+.profile-card__meta {
   color: var(--paper);
   line-height: 1.7;
+}
+
+.tier-card__meta,
+.mint-action-panel__hint,
+.profile-card__meta {
+  font-size: 0.88rem;
+  margin: 0;
 }
 
 .tier-card__stats,
@@ -389,6 +399,12 @@ a {
 .mint-action-panel__value {
   font-size: 1.25rem;
   margin: 0;
+}
+
+.tier-card__cta--disabled,
+.mint-action-panel__cta[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.58;
 }
 
 .mint-action-panel__stack,
@@ -458,12 +474,45 @@ a {
   margin: 0 0 0.5rem;
 }
 
+.profile-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.profile-card {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--line);
+  padding: 1.25rem;
+}
+
+.profile-card__eyebrow {
+  color: var(--paper-dim);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  margin: 0 0 0.6rem;
+  text-transform: uppercase;
+}
+
+.profile-card__title {
+  font-size: 1.65rem;
+  font-weight: 500;
+  line-height: 1.05;
+  margin: 0 0 0.75rem;
+}
+
+.profile-card p {
+  margin-top: 0;
+}
+
 @media (max-width: 960px) {
   .collection-hero,
   .mint-action-panel,
   .drop-manifesto__statements,
   .tier-grid,
-  .access-ledger__grid {
+  .access-ledger__grid,
+  .profile-grid {
     grid-template-columns: 1fr;
   }
 
