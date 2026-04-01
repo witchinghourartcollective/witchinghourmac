@@ -1,10 +1,11 @@
 import "./globals.css";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "Witching Hour Music",
-  description: "Witching Hour Music and Art Collective.",
+  title: "WHM: hOUR ARCHIVES",
+  description: "VOL. 1: TROPHY SCARS FROM THE hOUR",
   icons: {
     icon: "/brand/sigils/whm-sigil%20edit%203.22.26%20v2.svg",
     shortcut: "/brand/sigils/whm-sigil%20edit%203.22.26%20v2.svg",
@@ -17,24 +18,36 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const { brand, links } = siteConfig;
+
   return (
     <html lang="en">
       <body>
+        <header className="site-shell__header">
+          <Link href="/" className="site-shell__brand">
+            <span>{brand.mark}</span>
+            <small>{brand.name}</small>
+          </Link>
+          <nav aria-label="Primary" className="site-shell__nav">
+            {links.primary.map((link) => (
+              <Link key={link.href} href={link.href}>
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </header>
         {children}
-        <footer className="whm-footer-nav">
-          <nav aria-label="Primary">
-            <div className="whm-footer-group">
-              <Link href="/rich-jewelz" className="whm-footer-group-title">RICH JEWELZ</Link>
-              <p className="whm-footer-group-copy">ritualz, sigilz, and signal work</p>
-              <div className="whm-footer-subnav">
-                <Link href="/ritual">Ritual</Link>
-                <Link href="/sigils">Sigils</Link>
-              </div>
-            </div>
-            <Link href="/token">hOUR Token</Link>
-            <Link href="/links">Links</Link>
-            <Link href="/esp32">ESP32</Link>
-            <Link href="/dashboard">WAX Dashboard</Link>
+        <footer className="site-shell__footer">
+          <div>
+            <p className="site-shell__footer-mark">{brand.collection}</p>
+            <p className="site-shell__footer-copy">{brand.tagline}</p>
+          </div>
+          <nav aria-label="Utility" className="site-shell__footer-nav">
+            {links.utility.map((link) => (
+              <Link key={link.href} href={link.href}>
+                {link.label}
+              </Link>
+            ))}
           </nav>
         </footer>
       </body>
