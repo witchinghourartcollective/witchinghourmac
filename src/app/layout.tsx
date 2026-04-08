@@ -1,5 +1,6 @@
 import "./globals.css";
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { siteConfig } from "@/lib/site-config";
 
@@ -25,8 +26,21 @@ export default function RootLayout({
       <body>
         <header className="site-shell__header">
           <Link href="/" className="site-shell__brand">
-            <span>{brand.mark}</span>
-            <small>{brand.name}</small>
+            <span className="site-shell__brand-lockup" aria-hidden="true">
+              <span className="site-shell__brand-seal">
+                <Image
+                  src="/brand/sigils/whm-sigil edit 3.22.26 v2.svg"
+                  alt=""
+                  width={108}
+                  height={108}
+                  className="site-shell__brand-sigil"
+                />
+              </span>
+            </span>
+            <span className="site-shell__brand-copy">
+              <span>{brand.mark}</span>
+              <small>{brand.name}</small>
+            </span>
           </Link>
           <nav aria-label="Primary" className="site-shell__nav">
             {links.primary.map((link) => (
