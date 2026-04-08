@@ -1,0 +1,10 @@
+{
+  "name": "witching-hour-platform",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Platform-facing models for creator, collection, and progression layers.",
+  "type": "module",
+  "scripts": {
+    "check": "node -e \"console.log('witching-hour-platform ready')\""
+  }
+}
